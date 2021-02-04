@@ -1,7 +1,7 @@
 #**************************************************************************
 # Title: subset_ECLSK2011_efmodels.R
 # Author: William Murrah
-# Description:
+# Description: Script to create analytic ECLSK2011 file.
 # Created: Thursday, 09 January 2020
 # R version: R version 3.6.2 (2019-12-12)
 # Directory: /home/hank01/Projects/ECLSK_Manage
@@ -11,7 +11,8 @@
 library(EdSurvey)
 library(data.table)
 
-load("/media/hank01/source_data/ECLS_K/2011/eclsk2011.Rds")
+eclsk2011 <- readRDS("~/qmer/source_data/ECLS_K/2011/eclsk2011.Rds")
+
 
 ids <- c("childid", "parentid", "psuid")
 
@@ -41,9 +42,14 @@ socskill <- c(paste0(sknum, "tchapp"),
 
 vars <- c(ids, demog, dccs, numrev, math, read, sci, socskill)
 
-eclsk <- getData(eclsk2011, varnames = vars, addAttributes = TRUE,
-                 omittedLevels = FALSE, defaultConditions = FALSE)
+pdir <- getwd()
+setwd("~/qmer/")
+eclsk <- getData(eclsk2011,
+                 varnames = vars,
+                 addAttributes = TRUE,
+                 omittedLevels = FALSE, 
+                 defaultConditions = FALSE)
 
-mode(eclsk)
+class(eclsk)
 percentile("x1mscalk4", c(10, 50, 100), data = eclsk, 
            weightVar = "w4pf40")

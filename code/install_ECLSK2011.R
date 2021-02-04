@@ -19,10 +19,10 @@ library(EdSurvey)
 ## downloaded and placed in Data folder with .dat file.
 
 # Read .dat file into EdSurvey data frame.
-eclsk2011 <- readECLS_K2011("~/qmerDrive/source_data/ECLS_K/2011/", 
+eclsk2011 <- readECLS_K2011("~/qmer/source_data/ECLS_K/2011/", 
                             filename = "childK5p.dat", 
                             layoutFilename = "ECLSK2011_K5PUF.sps")
 
 # Save compressed version of EdSurvey dataframe to save time in future.
-saveRDS(eclsk2011, file = "~/qmerDrive/data/ECLS_K/2011/eclsk2011.Rds", 
-        compress = TRUE)
+saveRDS(eclsk2011, file = "~/qmer/Data/ECLS_K/2011/eclsk2011_v2.Rds", 
+         compress = TRUE)
