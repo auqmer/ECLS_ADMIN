@@ -7,13 +7,11 @@
 # Directory: /home/hank01/Projects/ECLSK_Manage
 #**************************************************************************
 # packages used -----------------------------------------------------------
-  
 library(EdSurvey)
-library(data.table)
 
-eclsk2011 <- readRDS("~/qmer/source_data/ECLS_K/2011/eclsk2011.Rds")
+eclsk11 <- readECLS_K2011("~/qmer/source_data/ECLS_K/2011")
 
-
+# ID varibles
 ids <- c("childid", "parentid", "psuid")
 
 # Demographics
@@ -27,9 +25,9 @@ flank <- "x8flanker"
 
 dccs <- c(paste0("x",1:4, "dccstot"), (paste0("x", 5:8, "dccsscr")))
 
-math <- paste0("x", 1:8, "mscalk4")
-read <- paste0("x", 1:8, "rscalk4")
-sci <- paste0("x", 2:8, "sscalk4")
+math <- paste0("x", 1:8, "mscalk5")
+read <- paste0("x", 1:8, "rscalk5")
+sci <- paste0("x", 2:8, "sscalk5")
 
 # "Non-cognitive"
 sknum <- c('x1', 'x2', 'x3', 'x4', 'x4k', 'x5', 'x6', 'x7', 'x8')
@@ -40,16 +38,20 @@ socskill <- c(paste0(sknum, "tchapp"),
               paste0(sknum, "tchint")
 )
 
-vars <- c(ids, demog, dccs, numrev, math, read, sci, socskill)
+# Weights
+# TODO: Add weights
 
-pdir <- getwd()
-setwd("~/qmer/")
-eclsk <- getData(eclsk2011,
+vars <- c(ids, demog, dccs, numrev, flanker, math, read, sci, socskill)
+
+projdir <- getwd()
+#setwd("~/qmer/")
+eclsk <- getData(data = eclsk11,
                  varnames = vars,
                  addAttributes = TRUE,
                  omittedLevels = FALSE, 
                  defaultConditions = FALSE)
 
 class(eclsk)
-percentile("x1mscalk4", c(10, 50, 100), data = eclsk, 
+percentile("x1mscalk5", c(10, 50, 100), data = eclsk, 
            weightVar = "w4pf40")
+
