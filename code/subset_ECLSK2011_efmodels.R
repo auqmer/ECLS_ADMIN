@@ -11,8 +11,6 @@ library(EdSurvey)
 
 eclsk11 <- readECLS_K2011("~/qmer/source_data/ECLS_K/2011")
 
-
-
 # Select variables by category --------------------------------------------
 
 # ID varibles
@@ -20,13 +18,12 @@ ids <- c("childid", "parentid")
 
 # Demographics
 demog <- c("x_chsex_r", "x_raceth_r")
-age <- c("x1kage_r", "x2kage_r", paste0("x", 3:8, "age"), "x1ageent")
+age <- c("x1kage_r", "x2kage_r", paste0("x", 3:9, "age"), "x1ageent")
 # Date of birth
 dob <- c("x_dobmm_r", "x_dobyy_r")
 
 
 # Family
-
 income <- c("x2inccat_i", "x4inccat_i", "x6inccat_i", 
             "x7inccat_i", "x8inccat_i", "x9inccat_i")
 
@@ -121,3 +118,13 @@ edsurveyTable(formula = ~ x_chsex_r + p9curmar, data = eclsk11,
 mod1 <- lm.sdf(x9mscalk5 ~ x1mscalk5 + x_chsex_r, data = eclsk, 
                weightVar = "w9c29p_9t90",varMethod = "jackknife")
 summary(mod1)
+
+
+rm(ids, age, dob, demog, 
+   income, parents, household, foodsecurity,
+   dccs, numrev, flanker, 
+   math, read, sci, 
+   socskill, 
+   sids, sloc, stype, schoolvars,
+   community, wts, hs, sknum, vars,
+   namesdat)
