@@ -48,7 +48,7 @@ inits <- getInitial(form, data = eclsk9)
 modlogiswf <- nlme(form,
                  data = eclsk9wf,
                  fixed = list(Asym ~ 1, xmid ~ 1, scal ~ 1),
-                 random = Asym + xmid +scal ~ 1 | childid,
+                 random = Asym + xmid + scal ~ 1 | childid,
                  start = inits,
                  na.action = na.omit)
 modlogiswf <- nlme(form,
