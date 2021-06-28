@@ -25,3 +25,13 @@ for(i in 1:length(names(eclsk))) {
     levels(eclsk[ , i])[levels(eclsk[ ,i]) %in% nas] <- NA 
   }
 }
+
+
+# Relevel specific factors
+
+eclsk$x1ksctyp <- relevel(eclsk$x1ksctyp, ref = "4: PUBLIC")
+
+
+save(eclsk, file = "~/qmer/Data/ECLS_K/2011/eclsk_clean.Rdata")
+
+rm(i, nas, tb)
