@@ -1,0 +1,41 @@
+---
+title: "ECLSK 2011 Descriptive Report"
+author: "William Murrah"
+date: "6/29/2021"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+library(modelsummary)
+```
+
+
+```{r}
+load("~/qmer/Data/ECLS_K/2011/eclsk_clean.Rdata")
+```
+
+```{r}
+vars <- c("x1kage_r", "x_chsex_r","race", "prek",
+          "x1mscalk5", "x1rscalk5", "x2sscalk5")
+
+dat <- eclsk[ ,vars]
+datasummary_skim(dat)
+```
+
+```{r}
+datasummary_skim(dat, type = "categorical")
+```
+
+```{r}
+datasummary_balance(~ race, data = dat, dinm = FALSE)
+```
+```{r}
+datasummary_crosstab(race ~ x_chsex_r, data = dat)
+```
+

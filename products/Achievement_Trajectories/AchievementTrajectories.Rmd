@@ -1,0 +1,24 @@
+---
+title: "Achievement Report"
+author: "William Murrah"
+date: "6/22/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(nlme)
+```
+
+```{r}
+load("~/qmer/Data/ECLS_K/2011/eclsklong.Rdata")
+
+eclsklong$cagey <- (eclsklong$age/12) - 
+```
+
+
+```{r, cache=TRUE}
+ggplot(eclsk, aes(x = ))
+```
+
