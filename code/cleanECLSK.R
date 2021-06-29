@@ -32,6 +32,37 @@ for(i in 1:length(names(eclsk))) {
 eclsk$x1ksctyp <- relevel(eclsk$x1ksctyp, ref = "4: PUBLIC")
 
 
+# Recode covariates
+
+# create 4 category race  and prek variables
+eclsk <- eclsk %>% 
+  mutate(race = recode_factor(x_raceth_r,
+                              `1: WHITE, NON-HISPANIC` = "White",
+                              `2: BLACK/AFRICAN AMERICAN, NON-HISPANIC` = 
+                                "Black",
+                              `3: HISPANIC, RACE SPECIFIED` = "Hispanic",
+                              `4: HISPANIC, NO RACE SPECIFIED` = "Hispanic",
+                              .default = "other"),
+         prek = recode_factor(x12primpk,
+                              `0: NO NONPARENTAL CARE` = "none",
+                              `1: RELATIVE CARE IN CHILD'S HOME` = "relative",
+                              `2: RELATIVE CARE IN ANOTHER HOME` = "relative",
+                              `3: RELATIVE CARE, LOCATION VARIES/NOT ASKED` = 
+                                "relative",
+                              `4: NONRELATIVE CARE IN CHILD'S HOME` =
+                                "non-relative",
+                              `5: NONRELATIVE CARE IN ANOTHER HOME` = 
+                                "non-relative",
+                              `6: NONRELATIVE CARE, LOCATION VARIES/NOT ASKED` = 
+                                "non-relative",
+                              `7: CENTER-BASED PROGRAM` = "center",
+                              `8: 2 OR MORE TYPES OF CARE WITH EQUAL HOURS` = 
+                                "center"))
+
+
+
+
+
 save(eclsk, file = "~/qmer/Data/ECLS_K/2011/eclsk_clean.Rdata")
 
 rm(i, nas, tb)
