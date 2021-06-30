@@ -17,21 +17,23 @@ eclskdt <- data.table(eclsk)
 
 eclsklong <- melt(eclskdt, variable.name = "time",
                   measure = list(
-                    age = age,
-                    sids = sids,
-                    sloc = sloc,
-                    math = math,
-                    read = read,
-                    sci  = sci,
-                    tchapp = tchapp,
-                    tchcon = tchcon,
-                    tchext = tchext,
-                    tchint = tchint,
-                    tchper = tchper,
-                    dccs = dccs,
-                    nrsscr = nrsscr,
-                    nrwabl = nrwabl
+                    age = variableNames[["age"]],
+                    sids = variableNames[["sids"]],
+                    sloc = variableNames[["sloc"]],
+                    math = variableNames[["math"]],
+                    read = variableNames[["read"]],
+                    sci  = variableNames[["sci"]],
+                    tchapp = variableNames[["tchapp"]],
+                    tchcon = variableNames[["tchcon"]],
+                    tchext = variableNames[["tchext"]],
+                    tchint = variableNames[["tchint"]],
+                    tchper = variableNames[["tchper"]],
+                    dccs = variableNames[["dccs"]],
+                    nrsscr = variableNames[["nrsscr"]],
+                    nrwabl = variableNames[["nrwabl"]]
                     )
                   )
 
 save(eclsklong, file = "~/qmer/Data/ECLS_K/2011/eclsklong.Rdata")
+
+rm(variableNames, eclskdt, eclsk)

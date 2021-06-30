@@ -11,7 +11,7 @@ tb <- function(x) {
   table(x, useNA = "always")
 }
 
-load("~/qmer/Data/ECLS_K/2011/eclsk.Rdata")
+load("~/qmer/Data/ECLS_K/2011/eclskraw.Rdata")
 eclsk <- transform(eclsk,
                    childid = factor(childid),
                    parentid = factor(parentid))
@@ -63,10 +63,8 @@ eclsk <- eclsk %>%
     # 
     )
 
-
-
-
-
+# save cleaned data to working data directory
 save(eclsk, file = "~/qmer/Data/ECLS_K/2011/eclsk_clean.Rdata")
 
+# Clean workspace
 rm(i, nas, tb)
