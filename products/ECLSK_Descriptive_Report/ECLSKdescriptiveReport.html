@@ -175,12 +175,10 @@ pre code {
 </div>
 
 
-<pre class="r"><code>load(&quot;~/qmer/Data/ECLS_K/2011/eclsk_clean.Rdata&quot;)</code></pre>
-<pre class="r"><code>vars &lt;- c(&quot;x1kage_r&quot;, &quot;x_chsex_r&quot;,&quot;race&quot;, &quot;prek&quot;,
-          &quot;x1mscalk5&quot;, &quot;x1rscalk5&quot;, &quot;x2sscalk5&quot;)
-
-dat &lt;- eclsk[ ,vars]
-datasummary_skim(dat)</code></pre>
+<pre class="r"><code>load(&quot;~/qmer/Data/ECLS_K/2011/eclska.Rdata&quot;)
+eclskdes &lt;- copy(eclska)
+eclskdes[ , c(&quot;id&quot;, &quot;pid&quot;, &quot;Time&quot;):=NULL]</code></pre>
+<pre class="r"><code>datasummary_skim(eclskdes)</code></pre>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -214,69 +212,28 @@ Max
 <tbody>
 <tr>
 <td style="text-align:left;">
-x1kage_r
+Age
 </td>
 <td style="text-align:right;">
-818
+2804
 </td>
 <td style="text-align:right;">
-13
+34
 </td>
 <td style="text-align:right;">
-67.5
+94.2
 </td>
 <td style="text-align:right;">
-4.5
+21.9
 </td>
 <td style="text-align:right;">
 44.8
 </td>
 <td style="text-align:right;">
-67.3
+90.4
 </td>
 <td style="text-align:right;">
-93.9
-</td>
-<td style="text-align:right;">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="48.00pt" height="12.00pt" viewBox="0 0 48.00 12.00">
-<defs>
-<style type="text/css">
-    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
-      fill: none;
-      stroke: #000000;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-miterlimit: 10.00;
-    }
-  </style>
-</defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clipPath id="cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw"><rect x="0.00" y="0.00" width="48.00" height="12.00"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw)"> </g><defs><clipPath id="cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw"><rect x="0.00" y="2.88" width="48.00" height="9.12"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw)"><rect x="-2.58" y="11.66" width="4.53" height="0.0014" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="1.95" y="11.66" width="4.53" height="0.0055" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="6.48" y="11.65" width="4.53" height="0.017" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="11.00" y="11.07" width="4.53" height="0.60" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="15.53" y="5.26" width="4.53" height="6.41" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="20.06" y="3.22" width="4.53" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="24.58" y="6.28" width="4.53" height="5.38" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="29.11" y="11.06" width="4.53" height="0.60" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="33.64" y="11.44" width="4.53" height="0.22" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="38.16" y="11.65" width="4.53" height="0.014" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="42.69" y="11.66" width="4.53" height="0.0041" style="stroke-width: 0.38; fill: #000000;"></rect></g>
-</svg>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-x1mscalk5
-</td>
-<td style="text-align:right;">
-11619
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-35.6
-</td>
-<td style="text-align:right;">
-11.6
-</td>
-<td style="text-align:right;">
-12.0
-</td>
-<td style="text-align:right;">
-34.3
-</td>
-<td style="text-align:right;">
-132.7
+157.5
 </td>
 <td style="text-align:right;">
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="48.00pt" height="12.00pt" viewBox="0 0 48.00 12.00">
@@ -290,31 +247,154 @@ x1mscalk5
       stroke-miterlimit: 10.00;
     }
   </style>
-</defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clipPath id="cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw"><rect x="0.00" y="0.00" width="48.00" height="12.00"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw)"> </g><defs><clipPath id="cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw"><rect x="0.00" y="2.88" width="48.00" height="9.12"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw)"><rect x="1.06" y="9.87" width="3.68" height="1.79" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="4.74" y="5.22" width="3.68" height="6.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="8.42" y="3.22" width="3.68" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="12.10" y="7.21" width="3.68" height="4.45" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="15.78" y="9.66" width="3.68" height="2.01" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="19.47" y="11.11" width="3.68" height="0.55" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="23.15" y="11.52" width="3.68" height="0.14" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="26.83" y="11.61" width="3.68" height="0.052" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="30.51" y="11.65" width="3.68" height="0.012" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="34.20" y="11.66" width="3.68" height="0.00" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="37.88" y="11.66" width="3.68" height="0.00" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="41.56" y="11.66" width="3.68" height="0.00" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="45.24" y="11.66" width="3.68" height="0.0015" style="stroke-width: 0.38; fill: #000000;"></rect></g>
+</defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clipPath id="cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw"><rect x="0.00" y="0.00" width="48.00" height="12.00"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw)"> </g><defs><clipPath id="cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw"><rect x="0.00" y="2.88" width="48.00" height="9.12"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw)"><rect x="-0.12" y="11.66" width="1.97" height="0.00073" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="1.85" y="11.66" width="1.97" height="0.0029" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="3.82" y="11.65" width="1.97" height="0.010" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="5.80" y="11.34" width="1.97" height="0.32" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="7.77" y="8.10" width="1.97" height="3.56" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="9.74" y="4.19" width="1.97" height="7.47" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="11.71" y="3.22" width="1.97" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="13.68" y="4.79" width="1.97" height="6.87" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="15.66" y="5.33" width="1.97" height="6.33" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="17.63" y="5.61" width="1.97" height="6.05" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="19.60" y="5.88" width="1.97" height="5.79" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="21.57" y="7.01" width="1.97" height="4.65" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="23.54" y="7.19" width="1.97" height="4.48" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="25.51" y="7.71" width="1.97" height="3.95" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="27.49" y="7.72" width="1.97" height="3.94" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="29.46" y="7.89" width="1.97" height="3.78" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="31.43" y="8.06" width="1.97" height="3.60" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="33.40" y="8.07" width="1.97" height="3.60" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="35.37" y="8.26" width="1.97" height="3.40" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="37.35" y="9.22" width="1.97" height="2.45" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="39.32" y="11.38" width="1.97" height="0.28" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="41.29" y="11.56" width="1.97" height="0.098" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="43.26" y="11.66" width="1.97" height="0.0058" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="45.23" y="11.66" width="1.97" height="0.00073" style="stroke-width: 0.38; fill: #000000;"></rect></g>
 </svg>
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-x1rscalk5
+SES
 </td>
 <td style="text-align:right;">
-11989
+4520
 </td>
 <td style="text-align:right;">
-14
+12
 </td>
 <td style="text-align:right;">
-54.1
+-0.1
 </td>
 <td style="text-align:right;">
-11.5
+0.8
 </td>
 <td style="text-align:right;">
-33.1
+-2.3
 </td>
 <td style="text-align:right;">
-52.8
+-0.1
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="48.00pt" height="12.00pt" viewBox="0 0 48.00 12.00">
+<defs>
+<style type="text/css">
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  </style>
+</defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clipPath id="cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw"><rect x="0.00" y="0.00" width="48.00" height="12.00"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw)"> </g><defs><clipPath id="cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw"><rect x="0.00" y="2.88" width="48.00" height="9.12"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw)"><rect x="1.15" y="11.60" width="1.80" height="0.060" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="2.95" y="11.49" width="1.80" height="0.17" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="4.76" y="11.17" width="1.80" height="0.49" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="6.56" y="11.20" width="1.80" height="0.46" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="8.36" y="10.31" width="1.80" height="1.35" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="10.17" y="9.01" width="1.80" height="2.65" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="11.97" y="6.67" width="1.80" height="4.99" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="13.78" y="5.14" width="1.80" height="6.52" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="15.58" y="3.22" width="1.80" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="17.39" y="3.63" width="1.80" height="8.03" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="19.19" y="3.22" width="1.80" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="21.00" y="3.73" width="1.80" height="7.93" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="22.80" y="5.28" width="1.80" height="6.38" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="24.60" y="5.32" width="1.80" height="6.34" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="26.41" y="6.05" width="1.80" height="5.61" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="28.21" y="6.53" width="1.80" height="5.13" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="30.02" y="7.24" width="1.80" height="4.42" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="31.82" y="8.17" width="1.80" height="3.49" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="33.63" y="8.73" width="1.80" height="2.93" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="35.43" y="9.84" width="1.80" height="1.82" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="37.24" y="10.42" width="1.80" height="1.24" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="39.04" y="11.11" width="1.80" height="0.55" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="40.84" y="11.40" width="1.80" height="0.26" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="42.65" y="11.55" width="1.80" height="0.12" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="44.45" y="11.59" width="1.80" height="0.071" style="stroke-width: 0.38; fill: #000000;"></rect></g>
+</svg>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+District Poverty
+</td>
+<td style="text-align:right;">
+49
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+19.9
+</td>
+<td style="text-align:right;">
+10.5
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+17.0
+</td>
+<td style="text-align:right;">
+54.0
+</td>
+<td style="text-align:right;">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="48.00pt" height="12.00pt" viewBox="0 0 48.00 12.00">
+<defs>
+<style type="text/css">
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  </style>
+</defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clipPath id="cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw"><rect x="0.00" y="0.00" width="48.00" height="12.00"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw)"> </g><defs><clipPath id="cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw"><rect x="0.00" y="2.88" width="48.00" height="9.12"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw)"><rect x="1.78" y="8.46" width="1.71" height="3.20" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="3.49" y="8.67" width="1.71" height="3.00" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="5.20" y="8.14" width="1.71" height="3.52" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="6.91" y="3.22" width="1.71" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="8.62" y="3.32" width="1.71" height="8.34" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="10.32" y="5.17" width="1.71" height="6.49" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="12.03" y="4.30" width="1.71" height="7.36" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="13.74" y="6.28" width="1.71" height="5.39" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="15.45" y="7.81" width="1.71" height="3.86" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="17.16" y="6.84" width="1.71" height="4.82" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="18.87" y="4.63" width="1.71" height="7.03" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="20.58" y="8.77" width="1.71" height="2.89" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="22.29" y="6.88" width="1.71" height="4.78" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="24.00" y="7.36" width="1.71" height="4.30" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="25.71" y="8.35" width="1.71" height="3.31" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="27.42" y="10.00" width="1.71" height="1.66" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="29.13" y="9.20" width="1.71" height="2.47" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="30.84" y="8.63" width="1.71" height="3.03" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="32.55" y="11.30" width="1.71" height="0.37" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="34.26" y="10.26" width="1.71" height="1.40" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="35.97" y="10.96" width="1.71" height="0.70" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="37.68" y="10.70" width="1.71" height="0.96" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="39.38" y="11.66" width="1.71" height="0.00" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="41.09" y="11.66" width="1.71" height="0.00" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="42.80" y="11.03" width="1.71" height="0.63" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="44.51" y="11.55" width="1.71" height="0.12" style="stroke-width: 0.38; fill: #000000;"></rect></g>
+</svg>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Math
+</td>
+<td style="text-align:right;">
+54042
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+78.4
+</td>
+<td style="text-align:right;">
+32.8
+</td>
+<td style="text-align:right;">
+11.7
+</td>
+<td style="text-align:right;">
+75.8
+</td>
+<td style="text-align:right;">
+148.0
+</td>
+<td style="text-align:right;">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="48.00pt" height="12.00pt" viewBox="0 0 48.00 12.00">
+<defs>
+<style type="text/css">
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  </style>
+</defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clipPath id="cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw"><rect x="0.00" y="0.00" width="48.00" height="12.00"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw)"> </g><defs><clipPath id="cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw"><rect x="0.00" y="2.88" width="48.00" height="9.12"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw)"><rect x="1.21" y="10.66" width="3.26" height="1.00" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="4.47" y="7.94" width="3.26" height="3.73" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="7.73" y="5.03" width="3.26" height="6.63" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="10.99" y="4.98" width="3.26" height="6.68" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="14.25" y="4.36" width="3.26" height="7.30" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="17.51" y="3.22" width="3.26" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="20.77" y="4.59" width="3.26" height="7.07" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="24.03" y="5.28" width="3.26" height="6.38" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="27.30" y="5.68" width="3.26" height="5.98" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="30.56" y="5.34" width="3.26" height="6.32" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="33.82" y="5.03" width="3.26" height="6.63" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="37.08" y="5.81" width="3.26" height="5.85" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="40.34" y="8.27" width="3.26" height="3.39" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="43.60" y="10.75" width="3.26" height="0.91" style="stroke-width: 0.38; fill: #000000;"></rect></g>
+</svg>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Reading
+</td>
+<td style="text-align:right;">
+47174
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+97.5
+</td>
+<td style="text-align:right;">
+32.1
+</td>
+<td style="text-align:right;">
+32.3
+</td>
+<td style="text-align:right;">
+101.8
 </td>
 <td style="text-align:right;">
 164.3
@@ -331,34 +411,34 @@ x1rscalk5
       stroke-miterlimit: 10.00;
     }
   </style>
-</defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clipPath id="cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw"><rect x="0.00" y="0.00" width="48.00" height="12.00"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw)"> </g><defs><clipPath id="cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw"><rect x="0.00" y="2.88" width="48.00" height="9.12"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw)"><rect x="0.71" y="10.63" width="3.39" height="1.03" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="4.10" y="5.29" width="3.39" height="6.37" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="7.49" y="3.22" width="3.39" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="10.88" y="8.72" width="3.39" height="2.94" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="14.26" y="10.95" width="3.39" height="0.71" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="17.65" y="11.45" width="3.39" height="0.21" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="21.04" y="11.40" width="3.39" height="0.26" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="24.43" y="11.53" width="3.39" height="0.13" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="27.82" y="11.60" width="3.39" height="0.062" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="31.20" y="11.66" width="3.39" height="0.00" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="34.59" y="11.66" width="3.39" height="0.00" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="37.98" y="11.66" width="3.39" height="0.00" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="41.37" y="11.66" width="3.39" height="0.00" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="44.76" y="11.66" width="3.39" height="0.0013" style="stroke-width: 0.38; fill: #000000;"></rect></g>
+</defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clipPath id="cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw"><rect x="0.00" y="0.00" width="48.00" height="12.00"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw)"> </g><defs><clipPath id="cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw"><rect x="0.00" y="2.88" width="48.00" height="9.12"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw)"><rect x="0.99" y="11.05" width="3.37" height="0.61" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="4.36" y="7.66" width="3.37" height="4.00" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="7.72" y="4.38" width="3.37" height="7.28" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="11.09" y="3.93" width="3.37" height="7.73" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="14.46" y="5.88" width="3.37" height="5.79" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="17.83" y="7.12" width="3.37" height="4.54" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="21.19" y="6.70" width="3.37" height="4.96" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="24.56" y="3.85" width="3.37" height="7.81" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="27.93" y="4.04" width="3.37" height="7.62" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="31.29" y="3.22" width="3.37" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="34.66" y="5.17" width="3.37" height="6.50" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="38.03" y="7.09" width="3.37" height="4.57" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="41.40" y="9.46" width="3.37" height="2.21" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="44.76" y="11.66" width="3.37" height="0.0027" style="stroke-width: 0.38; fill: #000000;"></rect></g>
 </svg>
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-x2sscalk5
+Science
 </td>
 <td style="text-align:right;">
-9462
+48237
 </td>
 <td style="text-align:right;">
-7
+44
 </td>
 <td style="text-align:right;">
-33.5
+51.3
 </td>
 <td style="text-align:right;">
-7.4
+17.5
 </td>
 <td style="text-align:right;">
-19.2
+17.7
 </td>
 <td style="text-align:right;">
-33.4
+49.3
 </td>
 <td style="text-align:right;">
-55.3
+90.1
 </td>
 <td style="text-align:right;">
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="48.00pt" height="12.00pt" viewBox="0 0 48.00 12.00">
@@ -372,13 +452,136 @@ x2sscalk5
       stroke-miterlimit: 10.00;
     }
   </style>
-</defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clipPath id="cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw"><rect x="0.00" y="0.00" width="48.00" height="12.00"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw)"> </g><defs><clipPath id="cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw"><rect x="0.00" y="2.88" width="48.00" height="9.12"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw)"><rect x="0.31" y="10.47" width="2.46" height="1.19" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="2.78" y="7.31" width="2.46" height="4.35" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="5.24" y="7.28" width="2.46" height="4.38" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="7.70" y="6.65" width="2.46" height="5.02" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="10.16" y="5.71" width="2.46" height="5.95" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="12.63" y="4.63" width="2.46" height="7.04" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="15.09" y="3.92" width="2.46" height="7.74" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="17.55" y="3.22" width="2.46" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="20.02" y="3.62" width="2.46" height="8.04" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="22.48" y="3.74" width="2.46" height="7.93" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="24.94" y="4.85" width="2.46" height="6.81" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="27.41" y="5.96" width="2.46" height="5.71" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="29.87" y="7.60" width="2.46" height="4.06" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="32.33" y="8.99" width="2.46" height="2.67" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="34.79" y="9.73" width="2.46" height="1.93" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="37.26" y="10.76" width="2.46" height="0.90" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="39.72" y="10.80" width="2.46" height="0.86" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="42.18" y="11.32" width="2.46" height="0.34" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="44.65" y="11.58" width="2.46" height="0.079" style="stroke-width: 0.38; fill: #000000;"></rect></g>
+</defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clipPath id="cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw"><rect x="0.00" y="0.00" width="48.00" height="12.00"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw)"> </g><defs><clipPath id="cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw"><rect x="0.00" y="2.88" width="48.00" height="9.12"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw)"><rect x="0.12" y="11.09" width="3.07" height="0.57" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="3.19" y="8.63" width="3.07" height="3.03" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="6.26" y="6.45" width="3.07" height="5.22" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="9.32" y="4.22" width="3.07" height="7.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="12.39" y="3.22" width="3.07" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="15.46" y="3.22" width="3.07" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="18.52" y="3.97" width="3.07" height="7.69" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="21.59" y="4.88" width="3.07" height="6.78" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="24.66" y="5.29" width="3.07" height="6.37" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="27.73" y="5.65" width="3.07" height="6.02" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="30.79" y="6.22" width="3.07" height="5.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="33.86" y="6.71" width="3.07" height="4.95" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="36.93" y="7.51" width="3.07" height="4.15" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="40.00" y="8.75" width="3.07" height="2.91" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="43.06" y="9.36" width="3.07" height="2.30" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="46.13" y="11.60" width="3.07" height="0.062" style="stroke-width: 0.38; fill: #000000;"></rect></g>
+</svg>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DCCS
+</td>
+<td style="text-align:right;">
+12357
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+11.2
+</td>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+8.7
+</td>
+<td style="text-align:right;">
+18.0
+</td>
+<td style="text-align:right;">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="48.00pt" height="12.00pt" viewBox="0 0 48.00 12.00">
+<defs>
+<style type="text/css">
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  </style>
+</defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clipPath id="cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw"><rect x="0.00" y="0.00" width="48.00" height="12.00"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw)"> </g><defs><clipPath id="cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw"><rect x="0.00" y="2.88" width="48.00" height="9.12"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw)"><rect x="1.78" y="11.64" width="2.47" height="0.022" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="4.25" y="11.64" width="2.47" height="0.024" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="6.72" y="11.33" width="2.47" height="0.33" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="9.19" y="10.92" width="2.47" height="0.74" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="11.65" y="11.48" width="2.47" height="0.18" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="14.12" y="10.06" width="2.47" height="1.60" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="16.59" y="7.09" width="2.47" height="4.57" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="19.06" y="3.22" width="2.47" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="21.53" y="7.13" width="2.47" height="4.53" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="24.00" y="10.51" width="2.47" height="1.15" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="26.47" y="11.62" width="2.47" height="0.043" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="28.94" y="11.52" width="2.47" height="0.14" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="31.41" y="11.19" width="2.47" height="0.48" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="33.88" y="10.07" width="2.47" height="1.59" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="36.35" y="6.23" width="2.47" height="5.43" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="38.81" y="8.60" width="2.47" height="3.06" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="41.28" y="8.38" width="2.47" height="3.28" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="43.75" y="8.19" width="2.47" height="3.47" style="stroke-width: 0.38; fill: #000000;"></rect></g>
+</svg>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Numbers Reversed
+</td>
+<td style="text-align:right;">
+165
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+95.5
+</td>
+<td style="text-align:right;">
+16.9
+</td>
+<td style="text-align:right;">
+14.0
+</td>
+<td style="text-align:right;">
+97.0
+</td>
+<td style="text-align:right;">
+197.0
+</td>
+<td style="text-align:right;">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="48.00pt" height="12.00pt" viewBox="0 0 48.00 12.00">
+<defs>
+<style type="text/css">
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  </style>
+</defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clipPath id="cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw"><rect x="0.00" y="0.00" width="48.00" height="12.00"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw)"> </g><defs><clipPath id="cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw"><rect x="0.00" y="2.88" width="48.00" height="9.12"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw)"><rect x="0.81" y="11.65" width="2.43" height="0.012" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="3.23" y="11.62" width="2.43" height="0.042" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="5.66" y="11.57" width="2.43" height="0.092" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="8.09" y="11.46" width="2.43" height="0.20" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="10.52" y="11.12" width="2.43" height="0.54" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="12.95" y="10.27" width="2.43" height="1.39" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="15.38" y="7.65" width="2.43" height="4.01" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="17.81" y="6.68" width="2.43" height="4.98" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="20.24" y="3.22" width="2.43" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="22.66" y="4.54" width="2.43" height="7.12" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="25.09" y="7.56" width="2.43" height="4.10" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="27.52" y="10.32" width="2.43" height="1.34" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="29.95" y="11.39" width="2.43" height="0.27" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="32.38" y="11.60" width="2.43" height="0.062" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="34.81" y="11.64" width="2.43" height="0.020" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="37.24" y="11.65" width="2.43" height="0.0076" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="39.66" y="11.66" width="2.43" height="0.0031" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="42.09" y="11.66" width="2.43" height="0.00031" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="44.52" y="11.66" width="2.43" height="0.00092" style="stroke-width: 0.38; fill: #000000;"></rect></g>
+</svg>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Numbers Reversed (W-ability)
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+471.2
+</td>
+<td style="text-align:right;">
+34.7
+</td>
+<td style="text-align:right;">
+393.0
+</td>
+<td style="text-align:right;">
+476.0
+</td>
+<td style="text-align:right;">
+603.0
+</td>
+<td style="text-align:right;">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="48.00pt" height="12.00pt" viewBox="0 0 48.00 12.00">
+<defs>
+<style type="text/css">
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  </style>
+</defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clipPath id="cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw"><rect x="0.00" y="0.00" width="48.00" height="12.00"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwwLjAwfDEyLjAw)"> </g><defs><clipPath id="cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw"><rect x="0.00" y="2.88" width="48.00" height="9.12"></rect></clipPath></defs><g clip-path="url(#cpMC4wMHw0OC4wMHwyLjg4fDEyLjAw)"><rect x="1.14" y="11.53" width="2.12" height="0.14" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="3.26" y="6.74" width="2.12" height="4.92" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="5.38" y="11.24" width="2.12" height="0.42" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="7.49" y="11.09" width="2.12" height="0.57" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="9.61" y="10.41" width="2.12" height="1.25" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="11.72" y="7.35" width="2.12" height="4.31" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="13.84" y="11.65" width="2.12" height="0.0100" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="15.96" y="5.43" width="2.12" height="6.23" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="18.07" y="7.85" width="2.12" height="3.81" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="20.19" y="3.22" width="2.12" height="8.44" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="22.31" y="8.52" width="2.12" height="3.14" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="24.42" y="6.92" width="2.12" height="4.75" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="26.54" y="10.26" width="2.12" height="1.40" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="28.66" y="10.51" width="2.12" height="1.15" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="30.77" y="11.13" width="2.12" height="0.53" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="32.89" y="11.46" width="2.12" height="0.21" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="35.01" y="11.58" width="2.12" height="0.084" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="37.12" y="11.63" width="2.12" height="0.032" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="39.24" y="11.65" width="2.12" height="0.013" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="41.35" y="11.66" width="2.12" height="0.0065" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="43.47" y="11.66" width="2.12" height="0.00077" style="stroke-width: 0.38; fill: #000000;"></rect><rect x="45.59" y="11.66" width="2.12" height="0.00038" style="stroke-width: 0.38; fill: #000000;"></rect></g>
 </svg>
 </td>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>datasummary_skim(dat, type = &quot;categorical&quot;)</code></pre>
+<pre class="r"><code>datasummary_skim(eclskdes, type = &quot;categorical&quot;)</code></pre>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -397,13 +600,13 @@ N
 <tbody>
 <tr>
 <td style="text-align:left;">
-x_chsex_r
+Sex
 </td>
 <td style="text-align:left;">
-1: MALE
+Male
 </td>
 <td style="text-align:right;">
-9288
+83592
 </td>
 <td style="text-align:right;">
 51.1
@@ -413,10 +616,10 @@ x_chsex_r
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-2: FEMALE
+Female
 </td>
 <td style="text-align:right;">
-8847
+79623
 </td>
 <td style="text-align:right;">
 48.7
@@ -424,13 +627,13 @@ x_chsex_r
 </tr>
 <tr>
 <td style="text-align:left;">
-race
+Race
 </td>
 <td style="text-align:left;">
 White
 </td>
 <td style="text-align:right;">
-8488
+76392
 </td>
 <td style="text-align:right;">
 46.7
@@ -443,7 +646,7 @@ White
 Black
 </td>
 <td style="text-align:right;">
-2396
+21564
 </td>
 <td style="text-align:right;">
 13.2
@@ -456,7 +659,7 @@ Black
 Hispanic
 </td>
 <td style="text-align:right;">
-4592
+41328
 </td>
 <td style="text-align:right;">
 25.3
@@ -469,7 +672,7 @@ Hispanic
 other
 </td>
 <td style="text-align:right;">
-2655
+23895
 </td>
 <td style="text-align:right;">
 14.6
@@ -477,13 +680,13 @@ other
 </tr>
 <tr>
 <td style="text-align:left;">
-prek
+PreK
 </td>
 <td style="text-align:left;">
 none
 </td>
 <td style="text-align:right;">
-3174
+28566
 </td>
 <td style="text-align:right;">
 17.5
@@ -496,7 +699,7 @@ none
 relative
 </td>
 <td style="text-align:right;">
-2211
+19899
 </td>
 <td style="text-align:right;">
 12.2
@@ -509,7 +712,7 @@ relative
 non-relative
 </td>
 <td style="text-align:right;">
-881
+7929
 </td>
 <td style="text-align:right;">
 4.8
@@ -522,7 +725,7 @@ non-relative
 center
 </td>
 <td style="text-align:right;">
-8754
+78786
 </td>
 <td style="text-align:right;">
 48.2
@@ -530,10 +733,7 @@ center
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>datasummary_balance(~ race, data = dat)</code></pre>
-<pre><code>## Warning in datasummary_balance(~race, data = dat): The difference in means can only be calculate with two groups in
-##             the right-hand side variable. Set `dinm=FALSE` to suppress this
-##             warning.</code></pre>
+<pre class="r"><code>datasummary_balance(1 ~ Race, data = eclskdes, dinm = FALSE)</code></pre>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -541,22 +741,22 @@ center
 </th>
 <th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
-White (N=8488)
+White (N=76392)
 </div>
 </th>
 <th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
-Black (N=2396)
+Black (N=21564)
 </div>
 </th>
 <th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
-Hispanic (N=4592)
+Hispanic (N=41328)
 </div>
 </th>
 <th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
-other (N=2655)
+other (N=23895)
 </div>
 </th>
 </tr>
@@ -594,126 +794,281 @@ Std. Dev.
 <tbody>
 <tr>
 <td style="text-align:left;">
-x1kage_r
+Age
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-67.9
+94.8
 </td>
 <td style="text-align:left;">
-4.5
+22.2
 </td>
 <td style="text-align:left;">
-67.5
+92.2
 </td>
 <td style="text-align:left;">
-4.5
+21.6
 </td>
 <td style="text-align:left;">
-66.9
+94.2
 </td>
 <td style="text-align:left;">
-4.3
+21.7
 </td>
 <td style="text-align:left;">
-66.8
+93.6
 </td>
 <td style="text-align:left;">
-4.4
+21.8
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-x1mscalk5
+SES
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-38.0
+0.2
+</td>
+<td style="text-align:left;">
+0.7
+</td>
+<td style="text-align:left;">
+-0.4
+</td>
+<td style="text-align:left;">
+0.7
+</td>
+<td style="text-align:left;">
+-0.5
+</td>
+<td style="text-align:left;">
+0.7
+</td>
+<td style="text-align:left;">
+0.2
+</td>
+<td style="text-align:left;">
+0.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+District Poverty
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+15.9
+</td>
+<td style="text-align:left;">
+8.5
+</td>
+<td style="text-align:left;">
+26.5
+</td>
+<td style="text-align:left;">
+10.8
+</td>
+<td style="text-align:left;">
+24.5
+</td>
+<td style="text-align:left;">
+10.4
+</td>
+<td style="text-align:left;">
+17.3
+</td>
+<td style="text-align:left;">
+9.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Math
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+82.5
+</td>
+<td style="text-align:left;">
+33.3
+</td>
+<td style="text-align:left;">
+67.6
+</td>
+<td style="text-align:left;">
+29.4
+</td>
+<td style="text-align:left;">
+73.5
+</td>
+<td style="text-align:left;">
+31.2
+</td>
+<td style="text-align:left;">
+83.4
+</td>
+<td style="text-align:left;">
+33.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Reading
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+100.6
+</td>
+<td style="text-align:left;">
+32.6
+</td>
+<td style="text-align:left;">
+90.3
+</td>
+<td style="text-align:left;">
+30.2
+</td>
+<td style="text-align:left;">
+93.3
+</td>
+<td style="text-align:left;">
+30.9
+</td>
+<td style="text-align:left;">
+101.8
+</td>
+<td style="text-align:left;">
+32.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Science
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+55.3
+</td>
+<td style="text-align:left;">
+16.9
+</td>
+<td style="text-align:left;">
+44.8
+</td>
+<td style="text-align:left;">
+15.5
+</td>
+<td style="text-align:left;">
+46.8
+</td>
+<td style="text-align:left;">
+17.1
+</td>
+<td style="text-align:left;">
+52.8
+</td>
+<td style="text-align:left;">
+18.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DCCS
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 11.4
 </td>
 <td style="text-align:left;">
-31.7
+4.6
 </td>
 <td style="text-align:left;">
-9.6
+10.9
 </td>
 <td style="text-align:left;">
-30.8
+4.6
 </td>
 <td style="text-align:left;">
-10.2
+10.7
 </td>
 <td style="text-align:left;">
-39.0
+4.5
 </td>
 <td style="text-align:left;">
-12.7
+11.3
+</td>
+<td style="text-align:left;">
+4.5
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-x1rscalk5
+Numbers Reversed
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-55.5
+97.7
 </td>
 <td style="text-align:left;">
-11.1
+16.0
 </td>
 <td style="text-align:left;">
-52.3
+90.1
 </td>
 <td style="text-align:left;">
-10.0
+17.6
 </td>
 <td style="text-align:left;">
-50.3
+92.1
 </td>
 <td style="text-align:left;">
-9.7
+16.7
 </td>
 <td style="text-align:left;">
-57.5
+99.1
 </td>
 <td style="text-align:left;">
-14.8
+17.2
 </td>
 </tr>
 <tr>
 <td style="text-align:left;box-shadow: 0px 1px">
-x2sscalk5
+Numbers Reversed (W-ability)
 </td>
 <td style="text-align:left;box-shadow: 0px 1px">
 </td>
 <td style="text-align:left;box-shadow: 0px 1px">
-36.5
+475.4
 </td>
 <td style="text-align:left;box-shadow: 0px 1px">
-6.7
+32.6
 </td>
 <td style="text-align:left;box-shadow: 0px 1px">
-30.3
+460.8
 </td>
 <td style="text-align:left;box-shadow: 0px 1px">
-6.3
+36.2
 </td>
 <td style="text-align:left;box-shadow: 0px 1px">
-29.7
+465.9
 </td>
 <td style="text-align:left;box-shadow: 0px 1px">
-6.7
+36.0
 </td>
 <td style="text-align:left;box-shadow: 0px 1px">
-33.0
+476.1
 </td>
 <td style="text-align:left;box-shadow: 0px 1px">
-7.4
+34.3
 </td>
 </tr>
 <tr>
@@ -748,31 +1103,31 @@ N
 </tr>
 <tr>
 <td style="text-align:left;">
-x_chsex_r
+Sex
 </td>
 <td style="text-align:left;">
-1: MALE
+Male
 </td>
 <td style="text-align:left;">
-4402
+39618
 </td>
 <td style="text-align:left;">
 51.9
 </td>
 <td style="text-align:left;">
-1226
+11034
 </td>
 <td style="text-align:left;">
 51.2
 </td>
 <td style="text-align:left;">
-2333
+20997
 </td>
 <td style="text-align:left;">
 50.8
 </td>
 <td style="text-align:left;">
-1299
+11691
 </td>
 <td style="text-align:left;">
 48.9
@@ -782,28 +1137,28 @@ x_chsex_r
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
-2: FEMALE
+Female
 </td>
 <td style="text-align:left;">
-4072
+36648
 </td>
 <td style="text-align:left;">
 48.0
 </td>
 <td style="text-align:left;">
-1162
+10458
 </td>
 <td style="text-align:left;">
 48.5
 </td>
 <td style="text-align:left;">
-2246
+20214
 </td>
 <td style="text-align:left;">
 48.9
 </td>
 <td style="text-align:left;">
-1353
+12177
 </td>
 <td style="text-align:left;">
 51.0
@@ -811,31 +1166,31 @@ x_chsex_r
 </tr>
 <tr>
 <td style="text-align:left;">
-prek
+PreK
 </td>
 <td style="text-align:left;">
 none
 </td>
 <td style="text-align:left;">
-1334
+12006
 </td>
 <td style="text-align:left;">
 15.7
 </td>
 <td style="text-align:left;">
-374
+3366
 </td>
 <td style="text-align:left;">
 15.6
 </td>
 <td style="text-align:left;">
-1057
+9513
 </td>
 <td style="text-align:left;">
 23.0
 </td>
 <td style="text-align:left;">
-408
+3672
 </td>
 <td style="text-align:left;">
 15.4
@@ -848,25 +1203,25 @@ none
 relative
 </td>
 <td style="text-align:left;">
-953
+8577
 </td>
 <td style="text-align:left;">
 11.2
 </td>
 <td style="text-align:left;">
-325
+2925
 </td>
 <td style="text-align:left;">
 13.6
 </td>
 <td style="text-align:left;">
-625
+5625
 </td>
 <td style="text-align:left;">
 13.6
 </td>
 <td style="text-align:left;">
-308
+2772
 </td>
 <td style="text-align:left;">
 11.6
@@ -879,25 +1234,25 @@ relative
 non-relative
 </td>
 <td style="text-align:left;">
-592
+5328
 </td>
 <td style="text-align:left;">
 7.0
 </td>
 <td style="text-align:left;">
-75
+675
 </td>
 <td style="text-align:left;">
 3.1
 </td>
 <td style="text-align:left;">
-145
+1305
 </td>
 <td style="text-align:left;">
 3.2
 </td>
 <td style="text-align:left;">
-69
+621
 </td>
 <td style="text-align:left;">
 2.6
@@ -910,28 +1265,802 @@ non-relative
 center
 </td>
 <td style="text-align:left;">
-4504
+40536
 </td>
 <td style="text-align:left;">
 53.1
 </td>
 <td style="text-align:left;">
-1103
+9927
 </td>
 <td style="text-align:left;">
 46.0
 </td>
 <td style="text-align:left;">
-1835
+16515
 </td>
 <td style="text-align:left;">
 40.0
 </td>
 <td style="text-align:left;">
-1310
+11790
 </td>
 <td style="text-align:left;">
 49.3
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>datasummary_crosstab(Race ~ Sex, data = eclskdes)</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Race
+</th>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Male
+</th>
+<th style="text-align:right;">
+Female
+</th>
+<th style="text-align:right;">
+All
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+White
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+39618
+</td>
+<td style="text-align:right;">
+36648
+</td>
+<td style="text-align:right;">
+76392
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+% row
+</td>
+<td style="text-align:right;">
+51.9
+</td>
+<td style="text-align:right;">
+48.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Black
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+11034
+</td>
+<td style="text-align:right;">
+10458
+</td>
+<td style="text-align:right;">
+21564
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+% row
+</td>
+<td style="text-align:right;">
+51.2
+</td>
+<td style="text-align:right;">
+48.5
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hispanic
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+20997
+</td>
+<td style="text-align:right;">
+20214
+</td>
+<td style="text-align:right;">
+41328
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+% row
+</td>
+<td style="text-align:right;">
+50.8
+</td>
+<td style="text-align:right;">
+48.9
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+other
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+11691
+</td>
+<td style="text-align:right;">
+12177
+</td>
+<td style="text-align:right;">
+23895
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+% row
+</td>
+<td style="text-align:right;">
+48.9
+</td>
+<td style="text-align:right;">
+51.0
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+83592
+</td>
+<td style="text-align:right;">
+79623
+</td>
+<td style="text-align:right;">
+163566
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+% row
+</td>
+<td style="text-align:right;">
+51.1
+</td>
+<td style="text-align:right;">
+48.7
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>`Mean (SD)` &lt;- function(x) {
+  ifelse(Mean(x) &gt; 0, paste0(Mean(x, fmt = 2),&quot; (&quot;,SD(x, fmt = 2),&quot;)&quot;),
+         NA)
+}
+
+datasummary(Time ~ (Math+Reading+Science)*(N + `Mean (SD)`), eclska)</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Math
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Reading
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Science
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Time
+</th>
+<th style="text-align:right;">
+N
+</th>
+<th style="text-align:right;">
+Mean (SD)
+</th>
+<th style="text-align:right;">
+N
+</th>
+<th style="text-align:right;">
+Mean (SD)
+</th>
+<th style="text-align:right;">
+N
+</th>
+<th style="text-align:right;">
+Mean (SD)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Fall kindergarten
+</td>
+<td style="text-align:right;">
+15595
+</td>
+<td style="text-align:right;">
+35.56 (11.64)
+</td>
+<td style="text-align:right;">
+15669
+</td>
+<td style="text-align:right;">
+54.07 (11.50)
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Spring kindergarten
+</td>
+<td style="text-align:right;">
+17143
+</td>
+<td style="text-align:right;">
+49.86 (13.34)
+</td>
+<td style="text-align:right;">
+17186
+</td>
+<td style="text-align:right;">
+68.89 (14.73)
+</td>
+<td style="text-align:right;">
+16936
+</td>
+<td style="text-align:right;">
+33.48 (7.38)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fall first-grade
+</td>
+<td style="text-align:right;">
+5222
+</td>
+<td style="text-align:right;">
+57.71 (14.44)
+</td>
+<td style="text-align:right;">
+5194
+</td>
+<td style="text-align:right;">
+76.70 (16.97)
+</td>
+<td style="text-align:right;">
+5180
+</td>
+<td style="text-align:right;">
+35.58 (9.39)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Spring first-grade
+</td>
+<td style="text-align:right;">
+15103
+</td>
+<td style="text-align:right;">
+72.25 (15.73)
+</td>
+<td style="text-align:right;">
+15115
+</td>
+<td style="text-align:right;">
+94.40 (17.93)
+</td>
+<td style="text-align:right;">
+15072
+</td>
+<td style="text-align:right;">
+42.36 (10.36)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fall second-grade
+</td>
+<td style="text-align:right;">
+4729
+</td>
+<td style="text-align:right;">
+76.64 (16.41)
+</td>
+<td style="text-align:right;">
+4725
+</td>
+<td style="text-align:right;">
+100.37 (17.94)
+</td>
+<td style="text-align:right;">
+4724
+</td>
+<td style="text-align:right;">
+45.47 (11.47)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Spring second-grade
+</td>
+<td style="text-align:right;">
+13830
+</td>
+<td style="text-align:right;">
+89.86 (18.24)
+</td>
+<td style="text-align:right;">
+13837
+</td>
+<td style="text-align:right;">
+111.89 (17.22)
+</td>
+<td style="text-align:right;">
+13819
+</td>
+<td style="text-align:right;">
+52.04 (11.84)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Spring third-grade
+</td>
+<td style="text-align:right;">
+12866
+</td>
+<td style="text-align:right;">
+103.69 (18.04)
+</td>
+<td style="text-align:right;">
+12866
+</td>
+<td style="text-align:right;">
+120.54 (15.60)
+</td>
+<td style="text-align:right;">
+12856
+</td>
+<td style="text-align:right;">
+59.63 (12.14)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Spring fourth-grade
+</td>
+<td style="text-align:right;">
+12080
+</td>
+<td style="text-align:right;">
+112.29 (17.97)
+</td>
+<td style="text-align:right;">
+12074
+</td>
+<td style="text-align:right;">
+129.00 (14.92)
+</td>
+<td style="text-align:right;">
+12069
+</td>
+<td style="text-align:right;">
+66.38 (12.17)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Spring fifth-grade
+</td>
+<td style="text-align:right;">
+11426
+</td>
+<td style="text-align:right;">
+119.66 (17.79)
+</td>
+<td style="text-align:right;">
+11427
+</td>
+<td style="text-align:right;">
+136.08 (15.72)
+</td>
+<td style="text-align:right;">
+11419
+</td>
+<td style="text-align:right;">
+73.17 (13.04)
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>datasummary_correlation(eclskdes)</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Age
+</th>
+<th style="text-align:right;">
+SES
+</th>
+<th style="text-align:right;">
+District Poverty
+</th>
+<th style="text-align:right;">
+Math
+</th>
+<th style="text-align:right;">
+Reading
+</th>
+<th style="text-align:right;">
+Science
+</th>
+<th style="text-align:right;">
+DCCS
+</th>
+<th style="text-align:right;">
+Numbers Reversed
+</th>
+<th style="text-align:right;">
+Numbers Reversed (W-ability)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Age
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SES
+</td>
+<td style="text-align:right;">
+.01
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+District Poverty
+</td>
+<td style="text-align:right;">
+-.01
+</td>
+<td style="text-align:right;">
+-.39
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Math
+</td>
+<td style="text-align:right;">
+.85
+</td>
+<td style="text-align:right;">
+.21
+</td>
+<td style="text-align:right;">
+-.13
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Reading
+</td>
+<td style="text-align:right;">
+.83
+</td>
+<td style="text-align:right;">
+.20
+</td>
+<td style="text-align:right;">
+-.12
+</td>
+<td style="text-align:right;">
+.93
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Science
+</td>
+<td style="text-align:right;">
+.77
+</td>
+<td style="text-align:right;">
+.28
+</td>
+<td style="text-align:right;">
+-.19
+</td>
+<td style="text-align:right;">
+.89
+</td>
+<td style="text-align:right;">
+.87
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DCCS
+</td>
+<td style="text-align:right;">
+-.66
+</td>
+<td style="text-align:right;">
+.07
+</td>
+<td style="text-align:right;">
+-.05
+</td>
+<td style="text-align:right;">
+-.54
+</td>
+<td style="text-align:right;">
+-.55
+</td>
+<td style="text-align:right;">
+-.48
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+.
+</td>
+<td style="text-align:right;">
+.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Numbers Reversed
+</td>
+<td style="text-align:right;">
+.03
+</td>
+<td style="text-align:right;">
+.27
+</td>
+<td style="text-align:right;">
+-.16
+</td>
+<td style="text-align:right;">
+.31
+</td>
+<td style="text-align:right;">
+.29
+</td>
+<td style="text-align:right;">
+.28
+</td>
+<td style="text-align:right;">
+.08
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Numbers Reversed (W-ability)
+</td>
+<td style="text-align:right;">
+.64
+</td>
+<td style="text-align:right;">
+.21
+</td>
+<td style="text-align:right;">
+-.13
+</td>
+<td style="text-align:right;">
+.78
+</td>
+<td style="text-align:right;">
+.76
+</td>
+<td style="text-align:right;">
+.66
+</td>
+<td style="text-align:right;">
+-.34
+</td>
+<td style="text-align:right;">
+.77
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 </tbody>

@@ -15,24 +15,27 @@ source("code/variableNames.R")
 
 eclskdt <- data.table(eclsk)
 
+eclskdt$x1sscalk5 <- NA
+
 eclsklong <- melt(eclskdt, variable.name = "time",
-                  measure = list(
-                    age = variableNames[["age"]],
-                    sids = variableNames[["sids"]],
-                    sloc = variableNames[["sloc"]],
-                    math = variableNames[["math"]],
-                    read = variableNames[["read"]],
-                    sci  = variableNames[["sci"]],
+                  measure  = list(
+                    age    = variableNames[["age"]],
+                    sids   = variableNames[["sids"]],
+                    sloc   = variableNames[["sloc"]],
+                    math   = variableNames[["math"]],
+                    read   = variableNames[["read"]],
+                    sci    = c("x1sscalk5", variableNames[["sci"]]),
                     tchapp = variableNames[["tchapp"]],
                     tchcon = variableNames[["tchcon"]],
                     tchext = variableNames[["tchext"]],
                     tchint = variableNames[["tchint"]],
                     tchper = variableNames[["tchper"]],
-                    dccs = variableNames[["dccs"]],
+                    dccs   = variableNames[["dccs"]],
                     nrsscr = variableNames[["nrsscr"]],
                     nrwabl = variableNames[["nrwabl"]]
                     )
                   )
+
 
 save(eclsklong, file = "~/qmer/Data/ECLS_K/2011/eclsklong.Rdata")
 
