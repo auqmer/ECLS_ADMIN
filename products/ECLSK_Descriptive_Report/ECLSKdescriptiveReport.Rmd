@@ -3,9 +3,9 @@ title: "ECLSK 2011 Descriptive Report"
 author: "William Murrah"
 date: "6/29/2021"
 output:
-  pdf_document: default
   html_document:
     df_print: paged
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -13,29 +13,43 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(dplyr)
 library(modelsummary)
+library(data.table)
 ```
 
 
 ```{r}
-load("~/qmer/Data/ECLS_K/2011/eclsk_clean.Rdata")
+load("~/qmer/Data/ECLS_K/2011/eclska.Rdata")
+eclskdes <- copy(eclska)
+eclskdes[ , c("id", "pid", "Time"):=NULL]
 ```
 
 ```{r}
-vars <- c("x1kage_r", "x_chsex_r","race", "prek",
-          "x1mscalk5", "x1rscalk5", "x2sscalk5")
 
-dat <- eclsk[ ,vars]
-datasummary_skim(dat)
+datasummary_skim(eclskdes)
 ```
 
 ```{r}
-datasummary_skim(dat, type = "categorical")
+datasummary_skim(eclskdes, type = "categorical")
 ```
 
 ```{r}
-datasummary_balance(~ race, data = dat, dinm = FALSE)
+datasummary_balance(1 ~ Race, data = eclskdes, dinm = FALSE)
 ```
 ```{r}
-datasummary_crosstab(race ~ x_chsex_r, data = dat)
+datasummary_crosstab(Race ~ Sex, data = eclskdes)
+```
+
+```{r}
+
+`Mean (SD)` <- function(x) {
+  ifelse(Mean(x) > 0, paste0(Mean(x, fmt = 2)," (",SD(x, fmt = 2),")"),
+         NA)
+}
+
+datasummary(Time ~ (Math+Reading+Science)*(N + `Mean (SD)`), eclska)
+```
+
+```{r}
+datasummary_correlation(eclskdes)
 ```
 
