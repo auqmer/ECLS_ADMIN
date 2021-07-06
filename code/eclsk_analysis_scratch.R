@@ -76,9 +76,9 @@ lmmod.nlme <- nlme(lmmod.lis)
 
 
 
-modjb <- nlme(math ~ b_1i + b_2i*(age/12) + b_3i*(exp(gamma*(age/12))-1),
-              data = eclsklong,
+modjb <- nlme(Math ~ b_1i + b_2i*(Age8) + b_3i*(exp(gamma*(Age8))-1),
+              data = eclska,
               fixed = b_1i + b_2i + b_3i + gamma ~ 1,
-              random = b_1i + b_2i + b_3i ~ 1 | childid,
+              random = b_1i + b_2i + b_3i ~ 1 | id,
               start = c(35.5, 20, -10, -2),
               na.action = na.omit)
