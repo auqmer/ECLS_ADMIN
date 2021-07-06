@@ -12,8 +12,8 @@ ggplot(eclsk9, aes(x = age/12, y = math, group = childid, color = x_raceth_r)) +
 ggplot(eclsk9wf, aes(x = age/12, y = math, group = childid)) + 
   geom_line()
 
-modjb.nls <- nls(math ~  b_1i + b_2i*(age/12) + b_3i*(exp(gamma*(age/12))-1),
-                 data = eclsk9,
+modjb.nls <- nls(math ~  b_1i + b_2i*(time2) + b_3i*(exp(gamma*(age/12))-1),
+                 data = eclska7_100,
                  #fixed = b_1i + b_2i + b_3i + gamma ~ 1,
                  start = 
                  )
