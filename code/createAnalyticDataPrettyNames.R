@@ -58,6 +58,20 @@ levels(eclska$Time) <- c("Fall kindergarten", "Spring kindergarten",
                          "Fall second-grade", "Spring second-grade",
                          "Spring third-grade", "Spring fourth-grade",
                          "Spring fifth-grade")
+
+eclska$time <- as.numeric(eclska$Time)-1
+eclska <- eclska %>% 
+  mutate(time2 = recode(time,
+                        `0` = 0,
+                        `1` = .5,
+                        `2` = 1,
+                        `3` = 1.5,
+                        `4` = 2,
+                        `5` = 2.5,
+                        `6` = 3.5,
+                        `7` = 4.5,
+                        `8` = 5.5))
+
 rm(variableNames, analyticVariables)
 
 save(eclska, file = "~/qmer/Data/ECLS_K/2011/eclska.Rdata")

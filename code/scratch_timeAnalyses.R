@@ -3,7 +3,7 @@
 library(nlme)
 
 
-adat <- eclska7_100[complete.cases(eclska7_100), c("id", "Math", "time2","SES",
+adat <- eclska7_100[complete.cases(eclska7_100$SES), c("id", "Math", "time2","SES",
                                                    "Race", "Sex")]
 tmodlogis.nls <- nls(Math ~ SSlogis(time2, Asym, xmid, scal),
                      data = eclska7_100, na.action = na.omit)
