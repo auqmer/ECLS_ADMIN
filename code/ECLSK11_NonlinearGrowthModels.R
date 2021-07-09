@@ -14,45 +14,18 @@ library(nlme)
 
 # Data --------------------------------------------------------------------
 
+
+#### TODO: reconcile data frame missingness. Currently in the middle of
+#.         playing with complete case data 
+
+
 # load("~/qmer/Data/ECLS_K/2011/eclska7.Rdata")
 load("~/qmer/Data/ECLS_K/2011/eclska.Rdata")
 
+eclsk <- eclska[complete.cases(eclska[ ,c(3:4, 7,10)]), ]
 # Math --------------------------------------------------------------------
 
-### Logistics ###
-mathlogisA <- nlme(Math ~ SSlogis(time20, Asym, xmid, scal),
-                  data = eclska, na.action = na.omit,
-                  fixed = Asym + xmid + scal ~ 1,
-                  random = Asym  ~ 1,
-                  group = ~ id,
-                  start = c(Asym = 120, xmid = 3.4, scal = 4.2))
 
-mathlogisAX <- update(mathlogisA,
-                      random = Asym + xmid ~ 1)
-
-mathlogisAXS <- update(mathlogisA,
-                       random = Asym + xmid + scal ~ 1)
-
-
-### Gompertz ###
-
-mathgompA <- nlme(Math ~ SSgompertz(time2, Asym, b2, b3),
-                  data = eclska, na.action = na.omit,
-                  fixed = Asym + b2 + b3 ~ 1,
-                  random = Asym ~ 1 | id,
-                  start = c(Asym = 124, b2 = 1.2, b3 = .6))
-
-
-mathgompAB <- update(mathgompA,
-                     random = Asym + b2 ~ 1 | id)
-
-mathgompABB <- update(mathgompAB,
-                      random = Asym + b2 + b3 ~ 1 |id)
-
-
-save(mathgompA, mathgompAB, mathgompABB, 
-     file = "~/qmer/projects/ECLSK11_GrowthCurvePaper2022/data/mathgompModels\
-     .Rdata")
 # Reading -----------------------------------------------------------------
 
 readgompA <- nlme(Math ~ SSgompertz(time2, Asym, b2, b3),
@@ -64,7 +37,7 @@ readgompA <- nlme(Math ~ SSgompertz(time2, Asym, b2, b3),
 readgompAB <- update(readgompA,
                      random = Asym + b2 ~ 1 |id)
 
-readgompABB <- update(readgompA,
+readgompABB <- update(readgompAB,
                       random = Asym + b2 + b3 ~ 1 | id,
                       start = c(Asym = 126, b2 = 1.2, b3 = .6)
                       )
@@ -74,17 +47,30 @@ save(readgompA, readgompAB, readgompABB,
      Rdata")
 # Science -----------------------------------------------------------------
 
-scidat <- eclska[eclska$time2 > 0, ]
-
-eclska$timesci <- eclska$time2 - .5
-sciencegompA <-  nlme(Science ~ SSgompertz(time2-.5, Asym, b2, b3),
-                      data = eclska, 
+sciencegomp.nls <- nls(Science ~ SSgompertz(time2-.5, Asym, b2, b3),
+                       data = eclsk, na.action = na.omit)
+sciencegompAB <-  nlme(Science ~ SSgompertz(time2-.5, Asym, b2, b3),
+                      data = eclsk, 
                       na.action = na.omit, 
                       fixed = Asym + b2 + b3 ~ 1,
-                      random = Asym ~ 1 | id,
-                      start = c(Asym = 99.3, b2 = 1.1, b3 = .8),
-                      control = list(optim = "optim"))
+                      random = Asym + b2 ~ 1 | id,
+                      start = c(Asym = 85.12, b2 = .97, b3 = .71))
 
 sciencegompAB <- update(sciencegompA,
                         random = Asym + b2 ~ 1 | id)
 sciencegompABB <- update(mathgompABB, Science ~ 1 | id)
+
+save(sciencegompAB, file = "~/qmer/projects/ECLSK11_GrowthCurvePaper2022/data/\
+     sciencegompModels.Rdata")
+
+
+
+eclskcc <- eclska[complete.cases(eclska[ ,c("Science", "time2")]), ]
+
+plot(resid(sciencegompAB) ~ SES, data = eclskcc)
+abline(h = 0, col = "red")
+
+sciRE <- ranef(sciencegompAB, augFrame = TRUE)
+plot(ranef(sciencegompAB, augFrame = TRUE) ~ Sex*Race)
+abline(h=0, col = "red")
+MathRE <- random.effects(mathgompA, augFrame = TRUE, which = c(3,4), omitGroupingFactor = T)
