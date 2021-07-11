@@ -1,3 +1,4 @@
+
 library(ggplot2)
 library(nlme)
 
@@ -81,12 +82,30 @@ anova(sciencelogisAX, sciencegompAB)
 
 sRE <- ranef(sciencegompAB, augFrame = TRUE)
 
-plot(sRE, form = ~ Sex)
+plot(sRE, form = ~ SES)
 
 sciSex.nls <- nls(Science ~ SSgompertz(time2-.5, Asym, b2 , b3) | id,
                   data = eclska500, na.action = na.omit)
 
 sciSex <- update(sciencegompAB,
-                 fixed = list(Asym ~ 1, b2 ~ Sex + Race, b3 ~ 1),
-                 random = Asym ~ 1 | id,
-                 start = c()
+                 fixed = list(Asym ~ 1, b2 ~ SES * Race , b3 ~ 1),
+                 random = Asym  ~ 1 | id,
+                 start = c(Asym = 84.9, Sex = 0, Race = c(0,0,0),
+                           c(0,0,0),
+                           b2 = .96, b3 = .71))
+sciSex2 <- update(sciSex,
+                  random = Asym + b2 ~ 1 |id )
+summary(sciSex)
+anova(sciSex, sciSex2)
+
+scisexSES3 <- update(sciSex2,
+                    fixed = list(Asym ~ Race*SES , b2 ~ SES*Race, b3 ~ 1),
+                    start = c(Asym = 84.9, 
+                              Race = c(0,0,0),
+                              SES = 0,
+                              c(0,0,0),
+                              Sex = 0, Race = c(0,0,0),
+                              c(0,0,0),
+                              b2 = .96, b3 = .71))
+summary(scisexSES2)
+anova(scisexSES, scisexSES2)
