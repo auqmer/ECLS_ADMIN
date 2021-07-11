@@ -37,12 +37,13 @@ eclsk$x1ksctyp <- relevel(eclsk$x1ksctyp, ref = "4: PUBLIC")
 # create 4 category race  and prek variables
 eclsk <- eclsk %>% 
   mutate(
-    # Create 4 category race variable.
+    # Create 5 category race variable.
     race = recode_factor(x_raceth_r,
                          `1: WHITE, NON-HISPANIC` = "White",
                          `2: BLACK/AFRICAN AMERICAN, NON-HISPANIC` =  "Black",
                          `3: HISPANIC, RACE SPECIFIED` = "Hispanic",
                          `4: HISPANIC, NO RACE SPECIFIED` = "Hispanic",
+                         `5: ASIAN, NON-HISPANIC` = "Asian",
                          .default = "other"),
     # Create 4 category prekindergarten care variable.
     prek = recode_factor(x12primpk,
