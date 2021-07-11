@@ -12,17 +12,21 @@ gomp <- function(Asym, b2, b3, time) {
 }
 
 
-time <- seq(0, 5.5, by = .01)
+emmeans(mathA_B_RxG, param = "Asym", ~ Race | Sex)
+emmeans(mathA_B_RxG, param = "b2", ~ Race | Sex)
+emmeans(mathA_B_RxG, param = "b3", ~ Race | Sex)
+
+time <- seq(-5, 12, by = .01)
 b0 <- 131.7
-white <- gomp(131.7, 1.26, .6, time)
-black <- gomp(118.3, 1.25, .6, time)
-hispanic <- gomp(126.3, 1.31, .6, time)
-asian <- gomp(134.4, 1.27, .6, time)
-plot(white ~ time, type = "l", ylim = c(30, 132))
-lines(time, black, col = "red")
-lines(time, hispanic, col = "blue")
-lines(time, asian, col = "green")
-abline(h = 131.7)
+male.white <- gomp(130, 1.26, .584, time)
+male.black <- gomp(118.4, 1.26, .604, time)
+male.hispanic <- gomp(126.1, 1.31, .601, time)
+male.asian <- gomp(136.6, 1.27, .585, time)
+plot(male.white ~ time, type = "l", ylim = c(0, 132))
+lines(time, male.black, col = "red")
+lines(time, male.hispanic, col = "blue")
+lines(time, male.asian, col = "green")
+abline(v = c(0, 5.5))
 
 plot(Math ~ jitter(time2,3), data = eclskmath, subset = eclskmath$Race == "White")
 lines(time, white, col = "red")
