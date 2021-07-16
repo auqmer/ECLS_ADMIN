@@ -79,7 +79,8 @@ save(mathrichB, file = "~/qmer/projects/ECLSK11_GrowthCurvePaper2022/data/mathri
 # Covariate Models --------------------------------------------------------
 
 
-eclskmath <- eclska[complete.cases(eclska[ , c("Math", "time2", "Race", "Sex", "SES")]), ]
+eclskmath <- eclska[complete.cases(eclska[ , c("Math", "time2", 
+                                               "Race", "Sex", "SES")]), ]
 load("~/qmer/projects/ECLSK11_GrowthCurvePaper2022/data/mathgompModels
      .Rdata")
 
@@ -97,7 +98,8 @@ mathbase <- update(mathgompAB,
 
 math0_Race <-  update(mathbase,
                       fixed = list(Asym ~ 1, b2 ~ Race, b3 ~ 1),
-                      start = c(Asym = 127, b2 = 1.3, Race = c(0,0,0,0),  b3 = .6))
+                      start = c(Asym = 127, b2 = 1.3, Race = c(0,0,0,0),  
+                                b3 = .6))
 ## Asym
 
 math_SES <- update(mathbase,
@@ -171,7 +173,8 @@ mathA_S <-  update(mathbase,
                                b2 = 1.3,  SES = 0,
                                b3 = .6))
 mathA_RS <-   update(mathbase,
-                     fixed = list(Asym ~ Race*SES + Sex, b2 ~ Race + SES, b3 ~ 1),
+                     fixed = list(Asym ~ Race*SES + Sex, b2 ~ Race + SES, 
+                                  b3 ~ 1),
                      start = c(Asym = 127, Race = c(-13,-5,6,-2.3), 
                                SES = 7.5, Sex =0, 
                                `Race:SES` = c(1.6, 0, -3, 2.3),
@@ -179,7 +182,8 @@ mathA_RS <-   update(mathbase,
                                b3 = .6)) 
 
 mathA_RxSxG <-  update(mathbase,
-                       fixed = list(Asym ~ Race*SES + Sex, b2 ~ Race*SES*Sex, b3 ~ 1),
+                       fixed = list(Asym ~ Race*SES + Sex, b2 ~ Race*SES*Sex, 
+                                    b3 ~ 1),
                        start = c(Asym = 127, Race = c(-13,-5,6,-2.3), 
                                  SES = 7.5, Sex =0, 
                                  `Race:SES` = c(1.2, 0, -3, 2),
@@ -298,9 +302,23 @@ mathA_B_RG <- update(mathbase,
                               `SES:Sex`= 0, 
                               b3 = .6, Race = c(0,0,0,0), Sex = 0))
 
+mathABRxG_rB3 <- update(mathA_B_RxG,
+                        random = Asym + b2 + b3 ~ 1 | id, 
+                        start = c(Asym = 130.4, Race = c(-11.6,-4,6.5,-2),
+                                  SES = 7.4, Sex = -.94, 
+                                  `Race:SES` = c(1.4,0,-2.8,1.9),
+                                  b2=1.26, Race = c(0,.05,0,0),
+                                  SES = -.09, Sex=-.02,
+                                  `Race:SES`=c(.03,0,0,0),
+                                  `SES:Sex`=.03,
+                                  b3=.6, Race=c(.02,.02,0,0),
+                                  Sex=.02,
+                                  `Race:Sex`= c(-.01,-.01,0,0)))
+
+
 save(math_Race, math_RS, math_RxS, math_RxSG, math_RxSxG, 
      math_SES, math0_Race, mathA_B_G, mathA_B_R, mathA_B_RG, 
      mathA_B_RxG, mathA_B_S, mathA_Race, mathA_RS, mathA_RSxG2way, 
      mathA_RxS, mathA_RxSG2way, mathA_RxSxG, mathA_RxSxG2way, 
-     mathA_S, mathbase, 
+     mathA_S, mathbase,mathABRxG_rB3, 
      file = "~/qmer/projects/ECLSK11_GrowthCurvePaper2022/data/mathCovariateModels.Rdata")
