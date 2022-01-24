@@ -36,6 +36,7 @@ eclsklong <- melt(eclskdt, variable.name = "time",
                     )
                   )
 
+eclsklong <- setorder(eclsklong, childid, time)
 save(eclsklong, file = "~/qmer/Data/ECLS_K/2011/eclsklong.Rdata")
 
 rm(variableNames, eclskdt, eclsk)
