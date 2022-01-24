@@ -23,15 +23,13 @@ eclska7$time <- as.numeric(eclska7$Time)-1
 
 eclska7 <- eclska7 %>% 
   mutate(time2 = recode(time,
-        ` 0` = 0L,
-        ` 1` = 1L,
-        ` 3` = 3L,
-        ` 5` = 5L,
-        ` 6` = 7L,
-        ` 7` = 9L,
-        ` 8` = 11L))
+        ` 0` = 0,
+        ` 1` = .5,
+        ` 3` = 1.5,
+        ` 5` = 2.5,
+        ` 6` = 3.5,
+        ` 7` = 4.5,
+        ` 8` = 5.5))
 
-eclska7_100 <- eclska7[eclska7$id %in% ids100, ]
 
 save(eclska7, file = "~/qmer/Data/ECLS_K/2011/eclska7.Rdata")
-save(eclska7_100, file = "~/qmer/Data/ECLS_K/2011/eclska7_100.Rdata")

@@ -1,4 +1,4 @@
-#************************************************************************
+# ************************************************************************
 # Title: createAnalyticDataPrettyNames.R
 # Author: William Murrah
 # Description: Subset data to analytic variables with publication 
@@ -6,7 +6,7 @@
 # Created: Wednesday, 30 June 2021
 # R version: R version 4.1.0 (2021-05-18)
 # Project(working) directory: /home/hank01/Projects/QMER/ECLS_ADMIN
-#************************************************************************
+# ************************************************************************
 library(data.table)
 library(dplyr)
 load("~/qmer/Data/ECLS_K/2011/eclsklong.Rdata")
@@ -27,7 +27,10 @@ analyticVariables <- c(
   "sci",
   "dccs",
   "nrsscr",
-  "nrwabl"
+  "nrwabl",
+  "w9c29p_9a0",
+  "w9c29p_9astr",
+  "w9c29p_9apsu"
 )
 
 eclska <- subset(eclsklong, select = analyticVariables)
@@ -48,8 +51,11 @@ eclska <- eclska[ ,.(
   Science = sci,
   DCCS = dccs,
   `Numbers Reversed` = nrsscr,
-  `Numbers Reversed (W-ability)` = nrwabl
-           )]
+  `Numbers Reversed (W-ability)` = nrwabl,
+  `w9c29p_9a0` = w9c29p_9a0,
+  `w9c29p_9astr` = w9c29p_9astr,
+  `w9c29p_9apsu` = w9c29p_9apsu
+  )]
 
 eclska$Sex <- factor(eclska$Sex, labels = c("Male", "Female"))
 

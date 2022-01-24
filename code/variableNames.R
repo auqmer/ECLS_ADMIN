@@ -6,7 +6,7 @@
 # R version: R version 4.1.0 (2021-05-18)
 # Project(working) directory: /home/hank01/Projects/QMER/ECLS_ADMIN
 #************************************************************************
-
+require(dplyr)
 
 sknum <- c('x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8', 'x9')
 
@@ -66,6 +66,7 @@ variableNames <- list(
   # TODO: select relevant weights for longitudinal analyses.
   # Rounds: 1, 2, 4, 6,7,8,9
   #wts = names(eclsk11$weights)
-  wts = c("w9c29p_9t90", "w9c29p_9t91")
+  wts = c("w9c29p_9t90", "w9c29p_9t91", "w9c29p_9a0", "w9c29p_9apsu",
+          "w9c29p_9astr")
 )
 rm(sknum)

@@ -1,11 +1,11 @@
-#************************************************************************
+# ***********************************************************************
 # Title: ECLSK wide to long
 # Author: William Murrah
 # Description: Create long version of ECLSK data for growth models
 # Created: Thursday, 24 June 2021
 # R version: R version 4.1.0 (2021-05-18)
 # Project(working) directory: /home/hank01/Projects/QMER/ECLS_ADMIN
-#************************************************************************
+# ***********************************************************************
 library(data.table)
 
 load("~/qmer/Data/ECLS_K/2011/eclsk_clean.Rdata")
