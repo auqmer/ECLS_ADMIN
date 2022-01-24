@@ -1,11 +1,11 @@
-#************************************************************************
+# ************************************************************************
 # Title: Create subset of ECLSK:11 
 # Author: William Murrah
 # Description: Randomly sample 250 students from ECLSK2011 wide data
 # Created: Friday, 09 July 2021
 # R version: R version 4.1.0 (2021-05-18)
 # Project(working) directory: /home/hank01/Projects/QMER/ECLS_ADMIN
-#************************************************************************
+# ************************************************************************
 
 load("~/qmer/Data/ECLS_K/2011/eclsk_clean.Rdata")
 

@@ -1,4 +1,4 @@
-#************************************************************************
+# ************************************************************************
 # Title: create ECLSK with only cases with 9 time points
 # Author: William Murrah
 # Description: Remove cases with fewer than 9 timepoints for exploratory
@@ -6,7 +6,7 @@
 # Created: Monday, 28 June 2021
 # R version: R version 4.1.0 (2021-05-18)
 # Project(working) directory: /home/hank01/Projects/QMER/ECLS_ADMIN
-#************************************************************************
+# ************************************************************************
 
 
 library(dplyr)

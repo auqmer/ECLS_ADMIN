@@ -1,4 +1,4 @@
-#**************************************************************************
+# **************************************************************************
 # Title: install_ECLSK2011.R
 # Author: William Murrah
 # Description: Script to download and extract with labels the 2011 ECLSK,
@@ -7,7 +7,7 @@
 # Created: Tuesday, 31 December 2019
 # R version: R version 3.6.2 (2019-12-12)
 # Directory: /home/hank01/Projects/ECLSK_Manage
-#**************************************************************************
+# **************************************************************************
 # packages used -----------------------------------------------------------
   
 library(EdSurvey)
