@@ -58,10 +58,13 @@ variableNames <- list(
            "x7sctyp", "x8sctyp", "x9sctyp"),
   schoolvars = c("x2krceth", "x2flch2_i", "x2rlch2_i",
                 "x12yrrnd", "x_distpov"),
+  grade = paste0("x", 3:9, "grdlvl"), # Grade level starting second year.
   # Community variables
   community = c("x1hrsnow", "x12primpk", 
                "x2fsscal2", "x2fsadst2", "x2fsadst2", # 
                "x2fschst"),
+  schoolstart = searchSDF("schb", eclsk11)$variableName,
+  schoolend = searchSDF("sche", eclsk11)$variableName,
   # Weights
   # TODO: select relevant weights for longitudinal analyses.
   # Rounds: 1, 2, 4, 6,7,8,9
