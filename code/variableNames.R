@@ -7,7 +7,7 @@
 # Project(working) directory: /home/hank01/Projects/QMER/ECLS_ADMIN
 # ************************************************************************
 require(dplyr)
-
+require(EdSurvey)
 sknum <- c('x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8', 'x9')
 
 variableNames <- list(
@@ -63,8 +63,17 @@ variableNames <- list(
   community = c("x1hrsnow", "x12primpk", 
                "x2fsscal2", "x2fsadst2", "x2fsadst2", # 
                "x2fschst"),
-  schoolstart = searchSDF("schb", eclsk11)$variableName,
-  schoolend = searchSDF("sche", eclsk11)$variableName,
+  schoolstart = c("x2schbdd", "x4schbdd", "x6schbdd", "x7schbdd", "x8schbdd", 
+                  "x9schbdd", "x2schbmm", "x4schbmm", "x6schbmm", "x7schbmm", 
+                  "x8schbmm", "x9schbmm", "x2schbyy", "x4schbyy", "x6schbyy", 
+                  "x7schbyy",  "x8schbyy", "x9schbyy"),
+  schoolend = c("x2schedd", "x4schedd", "x6schedd", "x7schedd", "x8schedd", 
+                "x9schedd", "x2schemm", "x4schemm", "x6schemm", "x7schemm", 
+                "x8schemm",  "x9schemm", "x2scheyy", "x4scheyy", "x6scheyy", 
+                "x7scheyy", "x8scheyy",  "x9scheyy", "c1schedl", "c2schedl", 
+                "c3schedl", "c4schedl", "c5schedl", "c6schedl", "c7schedl", 
+                "c8schedl", "c9schedl", "p2bmdays", "e2hrsspe", "e4hrsspe", 
+                "e6hrsspe", "e7hrsspe", "e8hrsspe", "e9hrsspe"),
   # Weights
   # TODO: select relevant weights for longitudinal analyses.
   # Rounds: 1, 2, 4, 6,7,8,9

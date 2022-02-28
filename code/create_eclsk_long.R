@@ -7,7 +7,6 @@
 # Project(working) directory: /home/hank01/Projects/QMER/ECLS_ADMIN
 # ***********************************************************************
 library(data.table)
-
 load("~/qmer/Data/ECLS_K/2011/eclsk_clean.Rdata")
 
 # Load vectors of variables names by category
