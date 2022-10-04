@@ -1,0 +1,44 @@
+---
+title: "Missing Data Analysis and Multiple Imputation Process"
+author: "William Murrah"
+format: html
+editor: visual
+bibliography: references-imputation.bib
+---
+
+```{r, message=FALSE, comment=NULL}
+library(VIM)
+library(mice)
+load("~/qmer/Data/ECLS_K/2011/eclskimp.Rdata")
+load("../../data/eclskmi5_removeSEScomp.Rdata")
+```
+
+The `eclsk_clean.Rdata` data file was used as the basis for generating the following subset of data for the missing data analysis and multiple imputation (see the R script `code/imputeECLSKclean.R`)."a
+
+The following variables were used:
+
+```{r}
+names(eclskimp)
+```
+
+The procedures used to develop the multiple imputation process were based on @van2018flexible. First, we decided that the missing at random assumption was plausible, due to the extensive variables available in the ECLSK2011. To support this assumption the following missing data analysis was conducted.
+
+
+```{r, out.width='200%'}
+aggr(eclskimp, combined = TRUE, bars=FALSE)
+```
+
+```{r}
+plot(eclskmi5)
+```
+
+
+```{r}
+bwplot(eclskmi5)
+```
+
+
+```{r}
+densityplot(eclskmi5)
+```
+
