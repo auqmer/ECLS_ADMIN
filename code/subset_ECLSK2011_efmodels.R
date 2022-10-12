@@ -26,8 +26,6 @@ eclsk <- getData(data = eclsk11,
                  omittedLevels = FALSE, 
                  defaultConditions = FALSE)
 
-
-
 # Save raw data file.
 save(eclsk, file = "~/qmer/Data/ECLS_K/2011/eclskraw.Rdata")
 

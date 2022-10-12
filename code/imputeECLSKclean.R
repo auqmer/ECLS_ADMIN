@@ -12,17 +12,25 @@ library(mice)
 
 
 load("~/qmer/Data/ECLS_K/2011/eclsk_clean.Rdata")
+# Load vectors of variables names by category
+source("code/variableNames.R")
 
-imputation_variables <- c("childid", "x_chsex_r","x_raceth_r", "x1kage_r", 
-                          #"x2inccat_i",
-                          "x1par1age", #"x12par1ed_i", 
-                          "x12sesl",  "x1numsib",
-                          #"x1par1emp", "x1par2emp", 
-                          # "x1par1occ_i", "x1par2occ_i", 
-                          "x1nrsscr", "x1dccstot",
-                          "x1mscalk5", "x1rscalk5", "x2sscalk5")
+# Problem with labels on some factor(s), so removing variables to see which ones:
 
-eclskimp <- eclsk[ ,imputation_variables]
+str(eclskimp[ , which(sapply(eclskimp, is.factor))])
+
+variableNames <- variableNames[names(variableNames) != "wts"]
+imputation_variables <- unlist(variableNames)
+# imputation_variables <- c("childid", "x_chsex_r","x_raceth_r", "x1kage_r", 
+#                           #"x2inccat_i",
+#                           "x1par1age", #"x12par1ed_i", 
+#                           "x12sesl",  "x1numsib",
+#                           #"x1par1emp", "x1par2emp", 
+#                           # "x1par1occ_i", "x1par2occ_i", 
+#                           "x1nrsscr", "x1dccstot",
+#                           "x1mscalk5", "x1rscalk5", "x2sscalk5")
+
+eclskimp <- eclsk[ , imputation_variables]
 
 #save(eclskimp, file = "~/qmer/Data/ECLS_K/2011/eclskimp.Rdata")
 
@@ -34,7 +42,6 @@ pred[ ,1] <- 0
 
 noimp <- c(1, 5, 7:12)
 #pred[ noimp, ] <- 0
-
 
 # Run imputation
 startTime <- Sys.time()

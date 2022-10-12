@@ -26,13 +26,13 @@ eclskmilist <- purrr::map(eclskmilist, ~.x %>%
 # Convert each imputed data frame to a data.table for using the melt function
 eclskdt <- purrr::map(eclskmilist, as.data.table)
 
-eclskmilistlong <- map(eclskdt, ~.x %>% 
+eclskmilistlong <- purrr::map(eclskdt, ~.x %>% 
                  data.table::melt(variable.name = "time",
-                  measure  = list(
-                    age    = variableNames[["age"]],
-                    sids   = variableNames[["sids"]],
-                    sloc   = variableNames[["sloc"]],
-                    math   = variableNames[["math"]],
+                                  measure.vars  = list(
+                                    age    = variableNames[["age"]],
+                                    sids   = variableNames[["sids"]],
+                                    sloc   = variableNames[["sloc"]],
+                                    math   = variableNames[["math"]],
                     read   = variableNames[["read"]],
                     sci    = c("x1sscalk5", variableNames[["sci"]]),
                     tchapp = variableNames[["tchapp"]],
