@@ -47,18 +47,18 @@ eclska <- eclska[ ,.(
   Time = time,
   SES = x12sesl,
   PreK = prek,
-  `District Poverty` = x_distpov,
-  `Parent Age` = x1par1age,
-  `Number Siblings` = x1numsib,
+  District_Poverty = x_distpov,
+  Parent_Age = x1par1age,
+  Number_Siblings = x1numsib,
   Math = math,
   Reading = read,
   Science = sci,
   DCCS = dccs,
-  `Numbers Reversed` = nrsscr,
-  `Numbers Reversed (W-ability)` = nrwabl,
-  `w9c29p_9a0` = w9c29p_9a0,
-  `w9c29p_9astr` = w9c29p_9astr,
-  `w9c29p_9apsu` = w9c29p_9apsu
+  Numbers_Reversed = nrsscr,
+  Numbers_Reversed_Wability = nrwabl,
+  w9c29p_9a0 = w9c29p_9a0,
+  w9c29p_9astr = w9c29p_9astr,
+  w9c29p_9apsu = w9c29p_9apsu
   )]
 
 eclska$Sex <- factor(eclska$Sex, labels = c("Male", "Female"))
