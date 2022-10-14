@@ -21,6 +21,8 @@ analyticVariables <- c(
   "x12sesl",
   "x12primpk",
   "x_distpov",
+  "x1par1age",
+  "x1numsib",
   "prek",
   "math",
   "read",
@@ -46,6 +48,8 @@ eclska <- eclska[ ,.(
   SES = x12sesl,
   PreK = prek,
   `District Poverty` = x_distpov,
+  `Parent Age` = x1par1age,
+  `Number Siblings` = x1numsib,
   Math = math,
   Reading = read,
   Science = sci,
@@ -67,7 +71,7 @@ levels(eclska$Time) <- c("Fall kindergarten", "Spring kindergarten",
 
 eclska$time <- as.numeric(eclska$Time)-1
 eclska <- eclska %>% 
-  mutate(time2 = recode(time,
+  mutate(time2 = dplyr::recode(time,
                         `0` = 0,
                         `1` = .5,
                         `2` = 1,
