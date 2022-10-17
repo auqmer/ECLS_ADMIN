@@ -17,7 +17,7 @@ source("code/variableNames.R")
 
 # Problem with labels on some factor(s), so removing variables to see which ones:
 
-str(eclskimp[ , which(sapply(eclskimp, is.factor))])
+#str(eclskimp[ , which(sapply(eclskimp, is.factor))])
 
 imputation_variables <- c("childid", "x_chsex_r","x_raceth_r", "x1kage_r",
                           #"x2inccat_i",
@@ -28,22 +28,33 @@ imputation_variables <- c("childid", "x_chsex_r","x_raceth_r", "x1kage_r",
                           "x1nrsscr", "x1dccstot",
                           "x1mscalk5", "x1rscalk5", "x2sscalk5")
 
+
+
 eclskimp <- eclsk[ , imputation_variables]
+
+
+eclskimp$x_chsex_r <- factor(eclskimp$x_chsex_r)
+
+visitseq <- c("x1par1age", "x1numsib", "x1nrsscr", "x1dccstot",
+              "x_chsex_r","x_raceth_r", "x1kage_r",
+              "x1mscalk5", "x1rscalk5", "x2sscalk5", "x12sesl")
 
 #save(eclskimp, file = "~/qmer/Data/ECLS_K/2011/eclskimp.Rdata")
 
-imp0<- mice(eclskimp, maxit = 0)
-pred <- imp0$predictorMatrix
-meth <- imp0$method
+
+pred <- make.predictorMatrix(eclskimp)
+meth <- make.method(eclskimp)
 # Remove childid from variables used in imputation
 pred[ ,1] <- 0
 
-noimp <- c(1, 5, 7:12)
-#pred[ noimp, ] <- 0
+# noimp <- c(1, 5, 7:12)
+# pred[ noimp, ] <- 0
 
+meth[noimp] <- ""
 # Run imputation
 startTime <- Sys.time()
-eclskmi20<- mice(eclskimp, m = 20, maxit = 20, predictorMatrix = pred, )
+eclskmi2<- mice(eclskimp, m = 2, maxit = 50, predictorMatrix = pred, burn = 10,
+                 visitSequence = visitseq)
 endTime <- Sys.time()
 
 endTime-startTime
