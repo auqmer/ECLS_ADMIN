@@ -24,5 +24,5 @@
 
 ### Multiple Imputation Data
 
-
+* The `code/imputeECLSKclean.R` script is used to create 20 imputations of k entry variables with missing data and is save as "~/qmer/Data/ECLS_K/2011/eclskmi20_vs1.Rdata".
 

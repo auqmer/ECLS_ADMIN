@@ -34,10 +34,10 @@ eclskimp <- eclsk[ , imputation_variables]
 
 
 eclskimp$x_chsex_r <- factor(eclskimp$x_chsex_r)
-
+eclskimp$x_raceth_r <- factor(eclskimp$x_raceth_r)
 visitseq <- c("x1par1age", "x1numsib", "x1nrsscr", "x1dccstot",
-              "x_chsex_r","x_raceth_r", "x1kage_r",
-              "x1mscalk5", "x1rscalk5", "x2sscalk5", "x12sesl")
+              "x_chsex_r","x_raceth_r", "x1kage_r","x12sesl",
+              "x1mscalk5", "x1rscalk5", "x2sscalk5")
 
 #save(eclskimp, file = "~/qmer/Data/ECLS_K/2011/eclskimp.Rdata")
 
@@ -53,7 +53,7 @@ pred[ ,1] <- 0
 meth[noimp] <- ""
 # Run imputation
 startTime <- Sys.time()
-eclskmi2<- mice(eclskimp, m = 2, maxit = 50, predictorMatrix = pred, burn = 10,
+eclskmi20 <- mice(eclskimp, m = 20, maxit = 50, predictorMatrix = pred, burn = 10,
                  visitSequence = visitseq)
 endTime <- Sys.time()
 
@@ -73,4 +73,4 @@ densityplot(eclskmi20)
 
 # Save imputed data in R drive
 # Check that wmmurrah/qmer is attached
-save(eclskmi20, file = "~/qmer/Data/ECLS_K/2011/eclskmi20.Rdata")
+save(eclskmi20, file = "~/qmer/Data/ECLS_K/2011/eclskmi20_vs1.Rdata")
