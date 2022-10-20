@@ -14,6 +14,9 @@ source("code/variableNames.R")
 
 eclskdt <- data.table(eclsk)
 
+# Add empty science score at first time point, as science was not 
+# assessed until end of kindergarten year. This is needed to make the
+# science score vectors the same length as math and reading.
 eclskdt$x1sscalk5 <- NA
 
 eclsklong <- melt(eclskdt, variable.name = "time",
@@ -35,6 +38,7 @@ eclsklong <- melt(eclskdt, variable.name = "time",
                     )
                   )
 
+# Reorder rows by childid and time.
 eclsklong <- setorder(eclsklong, childid, time)
 save(eclsklong, file = "~/qmer/Data/ECLS_K/2011/eclsklong.Rdata")
 

@@ -9,16 +9,14 @@
 #------------------------------------------------------------------------
 
 library(mice)
-
-
+library(data.table)
+library(tidyverse)
 load("~/qmer/Data/ECLS_K/2011/eclsk_clean.Rdata")
 # Load vectors of variables names by category
 source("code/variableNames.R")
 
-# Problem with labels on some factor(s), so removing variables to see which ones:
-
-#str(eclskimp[ , which(sapply(eclskimp, is.factor))])
-
+# vector of variables used in the imputation process, both those
+# to be imputed and those used in the imputation models.
 imputation_variables <- c("childid", "x_chsex_r","x_raceth_r", "x1kage_r",
                           #"x2inccat_i",
                           "x1par1age", #"x12par1ed_i",
@@ -28,29 +26,38 @@ imputation_variables <- c("childid", "x_chsex_r","x_raceth_r", "x1kage_r",
                           "x1nrsscr", "x1dccstot",
                           "x1mscalk5", "x1rscalk5", "x2sscalk5")
 
+eclskimp <- eclsk
 
 
-eclskimp <- eclsk[ , imputation_variables]
-
-
-eclskimp$x_chsex_r <- factor(eclskimp$x_chsex_r)
-eclskimp$x_raceth_r <- factor(eclskimp$x_raceth_r)
+#clskimp$x_chsex_r <- factor(eclskimp$x_chsex_r)
+#eclskimp$x_raceth_r <- factor(eclskimp$x_raceth_r)
 visitseq <- c("x1par1age", "x1numsib", "x1nrsscr", "x1dccstot",
               "x_chsex_r","x_raceth_r", "x1kage_r","x12sesl",
               "x1mscalk5", "x1rscalk5", "x2sscalk5")
-
-#save(eclskimp, file = "~/qmer/Data/ECLS_K/2011/eclskimp.Rdata")
 
 
 pred <- make.predictorMatrix(eclskimp)
 meth <- make.method(eclskimp)
 # Remove childid from variables used in imputation
 pred[ ,1] <- 0
+pred[1, ] <- 0
+# Remove all variables but imputation variables from pred matrix
+nonimputation_variables <- names(eclskimp)[ !(names(eclskimp) %in% imputation_variables)]
+pred[nonimputation_variables, ] <- 0
+pred[ , nonimputation_variables] <- 0
+meth[nonimputation_variables] <- ""
+# Remove kindergarten achievement score from being imputed
+pred[c("x1mscalk5", "x1rscalk5", "x2sscalk5"), ] <- 0
+meth[c("x1mscalk5", "x1rscalk5", "x2sscalk5")] <- ""
 
-# noimp <- c(1, 5, 7:12)
-# pred[ noimp, ] <- 0
+# Drop llevel attribute which seems to be causing problems in imputation call
+# for(var in colnames(eclskimp)) {
+#   attr(eclskimp[ ,deparse(as.name(var))], "llevels") <- NULL
+# }
 
-meth[noimp] <- ""
+eclskimp[sapply(eclskimp, is.factor)] <- lapply(eclskimp[sapply(eclskimp, 
+                                                                is.factor)],
+                                                as.factor)
 # Run imputation
 startTime <- Sys.time()
 eclskmi20 <- mice(eclskimp, m = 20, maxit = 50, predictorMatrix = pred, burn = 10,
@@ -61,16 +68,67 @@ endTime-startTime
 
 plot(eclskmi20)
 
-imputed <- complete(eclskmi20)
-sapply(imputed, function(x) sum(is.na(x)))
+# Transform imputed data from wide to long
+# following code modified from: https://stats.stackexchange.com/questions/515598/is-it-possible-to-imput-values-using-mice-package-reshape-and-perform-gee-in-r
+eclskmi20complete <- complete(eclskmi20, action = "long", include = TRUE)
+eclskmi20complete <- data.table(eclskmi20complete)
+working_dats <- list()
+for(i in 0:max(eclskmi20complete$.imp)) {
+  working_dats[[i+1]] <- 
+    eclskmi20complete %>%
+    subset(.imp == i) %>%
+    #data.table() %>% 
+    data.table::melt(.data, variable.name = "time",
+         measure  = list(
+           age    = variableNames[["age"]],
+           sids   = variableNames[["sids"]],
+           sloc   = variableNames[["sloc"]],
+           math   = variableNames[["math"]],
+           read   = variableNames[["read"]],
+           sci    = c("x1sscalk5", variableNames[["sci"]]),
+           tchapp = variableNames[["tchapp"]],
+           tchcon = variableNames[["tchcon"]],
+           tchext = variableNames[["tchext"]],
+           tchint = variableNames[["tchint"]],
+           tchper = variableNames[["tchper"]],
+           dccs   = variableNames[["dccs"]],
+           nrsscr = variableNames[["nrsscr"]],
+           nrwabl = variableNames[["nrwabl"]]
+         )) %>%
+    mutate(.id = 1:nrow(.))
+}
+imputed_long <- as.mids(do.call(rbind, working_dats))
 
-save(eclskmi1, file = "data/eclskmi1_withsescomponents.Rdata")
 
-save(eclskmi20, file = "data/eclskmi20_removeSEScomp.Rdata")
-bwplot(eclskmi5)
 
-densityplot(eclskmi20)
+eclskmi20list <- miceadds::mids2datlist(eclskmi20)
 
+eclskmi20list <- lapply(eclskmi20list, data.table)
+
+eclskmi20list <- lapply(eclskmi20list, 
+                        melt(data = .data,
+                             id.vars = c("childid", "parentid"),
+                             variable.name = "time",
+                             measure.vars  = list(
+                               age    = variableNames[["age"]],
+                               sids   = variableNames[["sids"]],
+                               sloc   = variableNames[["sloc"]],
+                               math   = variableNames[["math"]],
+                               read   = variableNames[["read"]],
+                               sci    = c("x1sscalk5", variableNames[["sci"]]),
+                               tchapp = variableNames[["tchapp"]],
+                               tchcon = variableNames[["tchcon"]],
+                               tchext = variableNames[["tchext"]],
+                               tchint = variableNames[["tchint"]],
+                               tchper = variableNames[["tchper"]],
+                               dccs   = variableNames[["dccs"]],
+                               nrsscr = variableNames[["nrsscr"]],
+                               nrwabl = variableNames[["nrwabl"]]
+                             )))
+
+eclskmi20long <- with(eclskmi20list, {
+  setDT(.)
+})
 # Save imputed data in R drive
 # Check that wmmurrah/qmer is attached
-save(eclskmi20, file = "~/qmer/Data/ECLS_K/2011/eclskmi20_vs1.Rdata")
+save(eclskmi20, file = "~/qmer/Data/ECLS_K/2011/eclskmi20_vs2.Rdata")
