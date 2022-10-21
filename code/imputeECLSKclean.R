@@ -71,14 +71,14 @@ plot(eclskmi20)
 # Transform imputed data from wide to long
 # following code modified from: https://stats.stackexchange.com/questions/515598/is-it-possible-to-imput-values-using-mice-package-reshape-and-perform-gee-in-r
 eclskmi20complete <- complete(eclskmi20, action = "long", include = TRUE)
-eclskmi20complete <- data.table(eclskmi20complete)
+eclskmi20complete$x1sscalk5 <- NA
 working_dats <- list()
 for(i in 0:max(eclskmi20complete$.imp)) {
   working_dats[[i+1]] <- 
     eclskmi20complete %>%
     subset(.imp == i) %>%
     #data.table() %>% 
-    data.table::melt(.data, variable.name = "time",
+    data.table::melt(variable.name = "time",
          measure  = list(
            age    = variableNames[["age"]],
            sids   = variableNames[["sids"]],
@@ -97,13 +97,43 @@ for(i in 0:max(eclskmi20complete$.imp)) {
          )) %>%
     mutate(.id = 1:nrow(.))
 }
-imputed_long <- as.mids(do.call(rbind, working_dats))
+eclskmi20_long <- as.mids(do.call(rbind, working_dats))
 
+############### using with
 
+eclskmi20long <- with(eclskmi20,
+             {
+               dat <- data.frame(mget(ls()))
+               
+               dat_long <- pivot_longer(dat,
+                                        cols = c(variableNames[["age"]],
+                                                 variableNames[["sids"]],
+                                                 variableNames[["sloc"]],
+                                                 variableNames[["math"]],
+                                                 variableNames[["read"]],
+                                                 variableNames[["sids"]],
+                                                 c("x1sscalk5", variableNames[["sci"]]),
+                                                 variableNames[["tchapp"]],
+                                                 variableNames[["tchcon"]],
+                                                 variableNames[["tchext"]],
+                                                 variableNames[["tchint"]],
+                                                 variableNames[["tchper"]],
+                                                 variableNames[["dccs"]],
+                                                 variableNames[["nrsscr"]],
+                                                 variableNames[["nrwabl"]]),
+                                        names_to = c("age", "sids", "sloc",
+                                                     "math", "read", "tchapp",
+                                                     "tchcon", "tchext", "tchint",
+                                                     "tchper", "dccs", "nrsscr",
+                                                     "nrwabl"))
+             })
 
 eclskmi20list <- miceadds::mids2datlist(eclskmi20)
 
 eclskmi20list <- lapply(eclskmi20list, data.table)
+
+eclsk20long <- lapply(eclskmi20list, 
+                      pivot_longer(cols = ))
 
 eclskmi20list <- lapply(eclskmi20list, 
                         melt(data = .data,
@@ -132,3 +162,5 @@ eclskmi20long <- with(eclskmi20list, {
 # Save imputed data in R drive
 # Check that wmmurrah/qmer is attached
 save(eclskmi20, file = "~/qmer/Data/ECLS_K/2011/eclskmi20_vs2.Rdata")
+
+save(eclskmi20_long, file = "~/qmer/Data/ECLS_K/2011/eclskmi20long.Rdata")
