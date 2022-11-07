@@ -35,7 +35,6 @@ analyticVariables <- c(
   "w9c29p_9apsu"
 )
 
-eclska <- subset(eclsklong, select = analyticVariables)
 
 
 eclska <- eclska[ ,.(
