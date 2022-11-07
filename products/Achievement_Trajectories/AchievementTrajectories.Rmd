@@ -2,23 +2,82 @@
 title: "Achievement Report"
 author: "William Murrah"
 date: "6/22/2021"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+opts_chunk$set(echo = TRUE, comment = NULL)
 library(ggplot2)
 library(nlme)
+library(texreg)
+library(modelsummary)
+library(emmeans)
+```
+
+
+
+
+## Math Models
+
+### Logistic Growth Models
+
+```{r, results='asis'}
+load("~/qmer/projects/ECLSK11_GrowthCurvePaper2022/data/mathlogisModels.Rdata")
+
+texreg(list(mathlogisA, mathlogisAX, mathlogisAXS),
+       caption = "Logistic Growth Models")
 ```
 
 ```{r}
-load("~/qmer/Data/ECLS_K/2011/eclsklong.Rdata")
+anova(mathlogisA, mathlogisAX, mathlogisAXS)
+```
 
-eclsklong$cagey <- (eclsklong$age/12) - 
+### Gompertz Growth Models
+
+```{r, results='asis'}
+load("~/qmer/projects/ECLSK11_GrowthCurvePaper2022/data/mathgompModels
+     .Rdata")
+
+texreg(list(mathgompA, mathgompAB, mathgompABB),
+       caption = "Gompertz Growth Models")
 ```
 
 
-```{r, cache=TRUE}
-ggplot(eclsk, aes(x = ))
+```{r}
+anova(mathgompA, mathgompAB, mathgompABB)
+```
+
+
+### Richards Growth Curves
+
+```{r, results='asis'}
+load("~/qmer/projects/ECLSK11_GrowthCurvePaper2022/data/mathrichModel.Rdata")
+texreg(mathrichB, caption = "Richard Growth Model", 
+       custom.note = "Richard's models with other parameter configurations did not converge")
+```
+
+
+### Comparing Best Models
+
+```{r}
+anova(mathlogisAXS, mathgompABB, mathrichB)
+```
+
+
+## Adding Covariates
+
+```{r}
+load("~/qmer/projects/ECLSK11_GrowthCurvePaper2022/data/mathCovariateModels.Rdata")
+```
+
+```{r}
+summary(mathA_B_RxG)
+```
+
+```{r}
+emmeans(mathA_B_RxG, param = "Asym", ~ Race | Sex)
 ```
 
