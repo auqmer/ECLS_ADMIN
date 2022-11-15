@@ -1,11 +1,11 @@
-# ************************************************************************
+# ------------------------------------------------------------------------
 # Title: variableNames.R
 # Author: William Murrah
 # Description: vectors of variables by category. 
 # Created: Thursday, 24 June 2021
 # R version: R version 4.1.0 (2021-05-18)
 # Project(working) directory: /home/hank01/Projects/QMER/ECLS_ADMIN
-# ************************************************************************
+# ------------------------------------------------------------------------
 require(dplyr)
 require(EdSurvey)
 sknum <- c('x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8', 'x9')

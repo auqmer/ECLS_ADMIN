@@ -11,31 +11,6 @@ library(data.table)
 library(dplyr)
 library(mice)
 load(file = "~/qmer/Data/ECLS_K/2011/eclskmi20long.Rdata")
-# source("code/variableNames.R")
-
-# Create list of analytic variables
-# analyticVariables <- c(
-#   variableNames[["ids"]],
-#   variableNames[["demog"]][1:2],
-#   "age",
-#   "time",
-#   "race",
-#   "x12sesl",
-#   "x12primpk",
-#   "x_distpov",
-#   "x1par1age",
-#   "x1numsib",
-#   "prek",
-#   "math",
-#   "read",
-#   "sci",
-#   "dccs",
-#   "nrsscr",
-#   "nrwabl",
-#   "w9c29p_9a0",
-#   "w9c29p_9astr",
-#   "w9c29p_9apsu"
-# )
 
 eclska <- complete(eclskmi20_long, action = "long", include = TRUE)
 rm(eclskmi20_long)
@@ -89,8 +64,8 @@ eclska <- eclska %>%
                                `7` = 4.5,
                                `8` = 5.5))
 
+gc()
 
 
-eclskmi20_long <- as.mids(eclska)
 
-save(eclskmi20_long, file = "~/qmer/Data/ECLS_K/2011/eclskmi20longPN.Rdata")
+save(eclskmi20_long, file = "~/qmer/Data/ECLS_K/2011/eclskmi20long.Rdata")
