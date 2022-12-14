@@ -2,69 +2,30 @@
 # Title: Impute data for multiple imputation analyses
 # Author: William Murrah
 # Description: Use `mice` to impute data in wide format before creating
- #             long data.
+#             long data. 
 # Created: Tuesday, 30 August 2022
+# Modified: 2022/12/07 to use futuremice on HPC cluster Easley
 # R version: R version 4.2.1 (2022-06-23)
 # Project(working) directory: /home/wmmurrah/Projects/QMER/ECLS_ADMIN
 #------------------------------------------------------------------------
-
 library(mice)
 library(data.table)
 library(tidyverse)
-load("~/qmer/Data/ECLS_K/2011/eclsk_clean.Rdata")
-# Load vectors of variables names by category
+# Load imputation objects
+load("~/qmer/Data/ECLS_K/2011/eclskimpObjects.Rdata")
 source("code/variableNames.R")
-
-# vector of variables used in the imputation process, both those
-# to be imputed and those used in the imputation models.
-imputation_variables <- c("childid", "x_chsex_r","x_raceth_r", "x1kage_r",
-                          #"x2inccat_i",
-                          "x1par1age", #"x12par1ed_i",
-                          "x12sesl",  "x1numsib",
-                          #"x1par1emp", "x1par2emp",
-                          # "x1par1occ_i", "x1par2occ_i",
-                          "x1nrsscr", "x1dccstot",
-                          "x1mscalk5", "x1rscalk5", "x2sscalk5")
-
-eclskimp <- eclsk
-
-
-#clskimp$x_chsex_r <- factor(eclskimp$x_chsex_r)
-#eclskimp$x_raceth_r <- factor(eclskimp$x_raceth_r)
-visitseq <- c("x1par1age", "x1numsib", "x1nrsscr", "x1dccstot",
-              "x_chsex_r","x_raceth_r", "x1kage_r","x12sesl",
-              "x1mscalk5", "x1rscalk5", "x2sscalk5")
-
-
-pred <- make.predictorMatrix(eclskimp)
-meth <- make.method(eclskimp)
-# Remove childid from variables used in imputation
-pred[ ,1] <- 0
-pred[1, ] <- 0
-# Remove all variables but imputation variables from pred matrix
-nonimputation_variables <- names(eclskimp)[ !(names(eclskimp) %in% imputation_variables)]
-pred[nonimputation_variables, ] <- 0
-pred[ , nonimputation_variables] <- 0
-meth[nonimputation_variables] <- ""
-# Remove kindergarten achievement score from being imputed
-pred[c("x1mscalk5", "x1rscalk5", "x2sscalk5"), ] <- 0
-meth[c("x1mscalk5", "x1rscalk5", "x2sscalk5")] <- ""
-
-# Drop llevel attribute which seems to be causing problems in imputation call
-# for(var in colnames(eclskimp)) {
-#   attr(eclskimp[ ,deparse(as.name(var))], "llevels") <- NULL
-# }
-
-eclskimp[sapply(eclskimp, is.factor)] <- lapply(eclskimp[sapply(eclskimp, 
-                                                                is.factor)],
-                                                as.factor)
 # Run imputation
+nimps <- 20
 startTime <- Sys.time()
-eclskmi20 <- mice(eclskimp, m = 20, maxit = 50, predictorMatrix = pred, burn = 10,
+eclskmi20 <- mice(data = eclskimp, m = nimps, 
+                        maxit = 50, 
+                        predictorMatrix = pred,
                  visitSequence = visitseq)
+
 endTime <- Sys.time()
 
 endTime-startTime
+
 
 #plot(eclskmi20)
 
