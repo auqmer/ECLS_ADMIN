@@ -40,7 +40,7 @@ for(i in 0:max(eclskmi20complete$.imp)) {
   working_dats[[i+1]] <- 
     eclskmi20complete %>%
     subset(.imp == i) %>%
-    #data.table() %>% 
+    data.table() %>% 
     data.table::melt(variable.name = "time",
          measure  = list(
            age    = variableNames[["age"]],
