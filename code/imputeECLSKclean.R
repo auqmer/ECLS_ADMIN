@@ -29,7 +29,7 @@ endTime-startTime
 
 #plot(eclskmi20)
 
-# Transform imputed data from wide to long
+# Transform imputed data from wide to long and convert to data frame.
 # following code modified from: https://stats.stackexchange.com/questions/515598/is-it-possible-to-imput-values-using-mice-package-reshape-and-perform-gee-in-r
 eclskmi20complete <- complete(eclskmi20, action = "long", include = TRUE)
 # Create column for unmeasured science scores at k entry.
@@ -60,6 +60,7 @@ for(i in 0:max(eclskmi20complete$.imp)) {
          )) %>%
     mutate(.id = 1:nrow(.))
 }
+
 eclskmi20_long <- as.mids(do.call(rbind, working_dats))
 
 

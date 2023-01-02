@@ -12,6 +12,7 @@ library(dplyr)
 library(mice)
 load(file = "~/qmer/Data/ECLS_K/2011/eclskmi20long.Rdata")
 
+# Transform mids object to data frame.
 eclska <- complete(eclskmi20_long, action = "long", include = TRUE)
 rm(eclskmi20_long)
 gc()
@@ -37,10 +38,7 @@ eclska <- eclska[ ,.(
   Science = sci,
   DCCS = dccs,
   Numbers_Reversed = nrsscr,
-  Numbers_Reversed_Wability = nrwabl,
-  w9c29p_9a0 = w9c29p_9a0,
-  w9c29p_9astr = w9c29p_9astr,
-  w9c29p_9apsu = w9c29p_9apsu
+  Numbers_Reversed_Wability = nrwabl
 )]
 
 eclska$Sex <- factor(eclska$Sex, labels = c("Male", "Female"))
@@ -66,6 +64,6 @@ eclska <- eclska %>%
 
 gc()
 
-
-
-save(eclskmi20_long, file = "~/qmer/Data/ECLS_K/2011/eclskmi20long.Rdata")
+# Convert data.table back to mids object.
+eclskmi20_longPN <- as.mids(eclska)
+save(eclskmi20_longPN, file = "~/qmer/Data/ECLS_K/2011/eclskmi20longPN.Rdata")

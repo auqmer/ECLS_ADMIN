@@ -24,5 +24,9 @@
 
 ### Multiple Imputation Data
 
-* The `code/imputeECLSKclean.R` script is used to create 20 imputations of k entry variables with missing data and is save as "~/qmer/Data/ECLS_K/2011/eclskmi20_vs1.Rdata".
+* The `code/imputeECLSKclean.R` script is used to create 20 imputations of k entry variables with missing data and is save as "~/qmer/Data/ECLS_K/2011/eclskmi20_vs2.Rdata". It also creates a long version and saves it as "~/qmer/Data/ECLS_K/2011/eclskmi20long.Rdata".
+
+* The `createPrettyNamesMI20.R` script loads the long version of the imputed data to create a long version with more understandable variable names, and saves it as "~/qmer/Data/ECLS_K/2011/eclskmi20longPN.Rdata", as a mids object.
+
+* The `create_multivariateMI20_long.R` script takes the long data file with understandable names and creates a multivariate data frame, with one variable for achievement, and a subject factor for math, reading, and science and saves it  as "~/qmer/Data/ECLS_K/2011/eclskmvalong.Rdata".
 

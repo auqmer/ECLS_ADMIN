@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------
 # Title: Create Multivariate Long Data
 # Author: William Murrah
-# Description: Create a longdata frame with an Achievement variable and
+# Description: Create a long data frame with an Achievement variable and
 #              factor for subject (math, reading, science) for 
 #              multivariate mixed-effects models from Analytic Data.   
 # Created: Tuesday, 15 March 2022
@@ -14,16 +14,16 @@ library(dplyr)
 load("~/qmer/Data/ECLS_K/2011/eclskmi20longPN.Rdata")
 
 # Create a list of original and imputed data frames
-eclskmvalong <- complete(eclskmi20_long, action = "all", include = TRUE)
+eclskmvalong <- complete(eclskmi20_longPN, action = "all", include = TRUE)
 
 # Clean up R memory
-rm(eclskmi20_long)
+rm(eclskmi20_longPN)
 gc()
 
 # Stack Achievement subjects in each data frame
 eclskmvalong <- lapply(X = eclskmvalong, 
                        FUN = function(x) {
-                         melt(data = x, variable.name = "Subject",
+                         reshape2::melt(data = x, variable.name = "Subject",
                     measure = c("Math", "Reading", 
                                                 "Science"),
                  value.name = "Achievement")}
